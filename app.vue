@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 // Import Swiper styles
 import 'swiper/css';
 
+
 export default {
   components: {
     Swiper,
@@ -12,7 +13,7 @@ export default {
   },
   setup() {
     const onSwiper = (swiper) => {
-      console.log(swiper);
+      console.log("swiper instance:", swiper);
     };
     const onSlideChange = () => {
       console.log('slide change');
@@ -25,7 +26,7 @@ export default {
 };
 </script>
 <template>
-  <div v-locomotive>
+  <div>
     <div class="mx-[60px] grid grid-cols-9 gap-[30px]">
       <spacing :size64="true" class="col-span-9" />
       <nav class="col-span-9 flex justify-between font-[530] tracking-[-0.01em]">
@@ -108,9 +109,8 @@ export default {
         <div class="w-full flex flex-col justify-start items-start">
           <div class="flex flex-col justify-end pt-[calc(4vw)] max-w-[calc(88vw)]">
             <h2
-              class="text-[calc(25vw)] leading-[calc(25vw)] tracking-[-0.01em] font-[600] text-left whitespace-nowrap overflow-clip">
-              Fine
-              forms, — Refined.
+              class="text-[calc(25vw)] leading-[calc(25vw)] tracking-[-0.01em] font-[530] text-left whitespace-nowrap">
+              Fine forms, — Refined.
             </h2>
             <div class="flex flex-row justify-between pt-2">
               <p
@@ -118,7 +118,7 @@ export default {
                 /THESE CHAIRS CAN BE
               </p>
               <p
-                class="text-[calc(1vw)] leading-[calc(1.5vw)] tracking-[-0.01em] font-[400] text-left max-w-[calc(24vw)]">
+                class="text-[calc(1.5vw)] leading-[calc(2vw)] tracking-[-0.01vw] font-[200] text-left max-w-[calc(35vw)]">
                 Fresh eyes see new possibilities for classic Eames designs, including a bold new colour palette and
                 updated materials.
               </p>

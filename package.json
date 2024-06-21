@@ -13,13 +13,11 @@
     "@nuxt/fonts": "^0.7.0",
     "nuxt": "^3.12.2",
     "vue": "^3.4.29",
-    "vue-horizontal": "0.8.11",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "latest",
     "autoprefixer": "latest",
-    "nuxt-locomotive-scroll": "latest",
     "nuxt-swiper": "latest",
     "postcss": "latest",
     "tailwindcss": "latest"
