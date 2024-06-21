@@ -140,7 +140,7 @@ export default {
     <section class="grid grid-cols-9 pt-[calc(10vw)]">
       <div class="relative col-span-9 grid grid-cols-9">
         <img src="/threechairs.jpg" alt="three chairs" class="w-full col-span-9">
-        <div class="text-[#C8BEB4] col-span-5 col-start-5 absolute mr-[60px] mt-[120px]">
+        <div class="text-[#C8BEB4] col-span-6 col-start-4 absolute mr-[calc(10vw-1em)] mt-[clamp(2vw,25%,10vw)]">
           <p class="text-[calc(3.5vw)] leading-[calc(3.8vw)] tracking-[-0.01em] font-[530]">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maréchal Verchetti is built on a
             legacy of creative partnership. In a first-of-its-kind collaboration, the
@@ -165,11 +165,11 @@ export default {
         design house HAY</p>
       <div class="relative pt-[calc(10vw)] col-start-1 col-span-9">
         <img src="/graychairs.jpg" alt="gray chairs">
-        <img src="/graychair.jpg" alt="gray chair" class="absolute bottom-[64px] left-[64px]">
+        <img src="/graychair.jpg" alt="gray chair" class="absolute bottom-[calc(5vw)] left-[calc(5vw)] w-3/12">
       </div>
       <footer class="col-span-9 col-start-1">
         <h1
-          class="text-[calc(12vw)] leading-[calc(12vw)] tracking-[calc(-0.4vw)] font-[530] whitespace-nowrap text-center text-[#333333] py-16">
+          class="text-[calc(12vw-1em)] leading-[calc(12vw)] tracking-[calc(-0.4vw-0.01em)] font-[530] whitespace-nowrap text-center text-[#333333] py-16">
           Another Collective</h1>
       </footer>
     </section>
