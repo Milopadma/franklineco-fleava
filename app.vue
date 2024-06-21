@@ -11,23 +11,31 @@ export default {
     Swiper,
     SwiperSlide,
   },
-  setup() {
-    const onSwiper = (swiper) => {
-      console.log("swiper instance:", swiper);
-    };
-    const onSlideChange = () => {
-      console.log('slide change');
-    };
+  data() {
     return {
-      onSwiper,
-      onSlideChange,
-    };
+      scroll: null
+    }
+  },
+  mounted() {
+    this.locomotiveScrollInit();
+  },
+  methods: {
+    locomotiveScrollInit() {
+      this.scroll = new this.$LocomotiveScroll({
+        el: document.querySelector('[data-scroll-container]'),
+        smooth: true,
+        getDirection: true
+      });
+
+      // log scroll instance for debugging
+      console.log("LocomotiveScroll instance:", this.scroll);
+    },
   },
 };
 </script>
 <template>
-  <div>
-    <div class="mx-[60px] grid grid-cols-9 gap-[30px]">
+  <div data-scroll-container class="overflow-x-hidden">
+    <div data-scroll class="mx-[60px] grid grid-cols-9 gap-[30px]">
       <spacing :size64="true" class="col-span-9" />
       <nav class="col-span-9 flex justify-between font-[530] tracking-[-0.01em]">
         <div>Frankliné&Co.</div>
