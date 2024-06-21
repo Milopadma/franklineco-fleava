@@ -21,19 +21,90 @@ export default {
     this.locomotiveScrollInit();
 
     const { $gsap, $ScrollTrigger } = useNuxtApp()
-    $gsap.to('.header', {
-      scrollTrigger: {
-        trigger: '.header',
-        start: 'top 200px',
-        end: '300%',
+    const headerText = document.querySelector('#header');
+    const characters = headerText.textContent.split('');
+    headerText.innerHTML = characters.map(char => `<span class="char">${char}</span>`).join('');
 
-        scrub: true,
-        reverse: true,
-        markers: false,
-      },
-      height: '0',
-      duration: '3',
-    })
+    const headerAnimation = $gsap.from('.char', {
+      opacity: 0,
+      y: 50, // slide in from bottom
+      duration: 2,
+      ease: 'power2.out',
+      stagger: 0.05
+    });
+
+    const navElements = document.querySelectorAll('#nav-logo, #nav-links, #nav-menu');
+    const navAnimations = [];
+    navElements.forEach((element, index) => {
+      const animation = $gsap.from(element, {
+        opacity: 0,
+        y: 50, // slide in from bottom
+        duration: 1.5,
+        ease: 'power2.out',
+        delay: 1 + index * 0.3 // add 1 second delay from anim start
+      });
+      navAnimations.push(animation);
+    });
+
+    const chairImageAnimation = $gsap.from('#chair-image', {
+      opacity: 0,
+      y: 50,
+      duration: 1.5,
+      ease: 'power2.out',
+      delay: 1
+    });
+
+    const chairText1 = document.querySelector('#chair-text-1');
+    const chairCharacters1 = chairText1.textContent.split('');
+    chairText1.innerHTML = chairCharacters1.map(char => `<span class="chair-char-1">${char}</span>`).join('');
+
+    const chairText2 = document.querySelector('#chair-text-2');
+    const chairCharacters2 = chairText2.textContent.split('');
+    chairText2.innerHTML = chairCharacters2.map(char => `<span class="chair-char-2">${char}</span>`).join('');
+
+    const chairTextAnimation1 = $ScrollTrigger.create({
+      trigger: '#chair-text-1',
+      start: 'top 50%',
+      onEnter: () => {
+        $gsap.from('.chair-char-1', {
+          opacity: 0,
+          y: 100, // slide in from bottom
+          duration: 0.1, // faster animation
+          ease: 'power2.out',
+          stagger: {
+            each: 0.02, // true per character stagger
+            from: "start"
+          }
+        });
+      }
+    });
+
+    const chairTextAnimation2 = $ScrollTrigger.create({
+      trigger: '#chair-text-2',
+      start: 'top 50%',
+      onEnter: () => {
+        $gsap.from('.chair-char-2', {
+          opacity: 0,
+          y: 100, // slide in from bottom
+          duration: 0.1, // faster animation
+          ease: 'power2.out',
+          stagger: {
+            each: 0.02, // true per character stagger
+            from: "start"
+          }
+        });
+      }
+    });
+
+    // restart all animations on mouse click for debugging purposes
+    window.addEventListener('click', () => {
+      console.log("Restarting animations for debugging purposes");
+      headerAnimation.restart();
+      navAnimations.forEach(animation => animation.restart());
+      chairImageAnimation.restart();
+      chairTextAnimation1.refresh();
+      chairTextAnimation2.refresh();
+    });
   },
   methods: {
     locomotiveScrollInit() {
@@ -63,25 +134,26 @@ export default {
     <div data-scroll class="mx-[60px] grid grid-cols-9 gap-[30px]">
       <spacing :size64="true" class="col-span-9" />
       <nav class="col-span-9 flex justify-between font-[530] tracking-[-0.01em]">
-        <div>Frankliné&Co.</div>
-        <div class="min-w-[35vw]">Products, Solutions, Stories </div>
-        <div>Menu</div>
+        <div id="nav-logo">Frankliné&Co.</div>
+        <div id="nav-links" class="min-w-[35vw]">Products, Solutions, Stories </div>
+        <div id="nav-menu">Menu</div>
       </nav>
       <header class="col-span-9 pt-[calc(10vw)]">
-        <h1
-          class="text-[calc(13vw-1em)] leading-[calc(10vw)] tracking-[calc(-0.2vw-0.01em)] font-[530] whitespace-nowrap text-center header">
+        <h1 id="header"
+          class="text-[calc(13vw-1em)] leading-[calc(10vw)] tracking-[calc(-0.2vw-0.01em)] font-[530] whitespace-nowrap text-center">
           Maréchal Verchetti
         </h1>
       </header>
       <section class="col-span-9 flex flex-col">
         <div class="flex items-center flex-col justify-center">
-          <img src="/chair.jpg" alt="chair" />
+          <img src="/chair.jpg" alt="chair" id="chair-image" />
         </div>
       </section>
       <section class="col-span-7 col-start-3 flex flex-col">
         <div class="w-full flex flex-col justify-end items-end">
           <div class="flex flex-col justify-end pt-[calc(4vw)]">
-            <p class="text-[calc(4.8vw)] leading-[calc(4.8vw)] tracking-[-0.01em] font-[530] text-left pb-4">
+            <p class="text-[calc(4.8vw)] leading-[calc(4.8vw)] tracking-[-0.01em] font-[530] text-left pb-4"
+              id="chair-text">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maréchal Verchetti is built on a
               legacy
               of creative partnership. In a first-of-its-kind
@@ -90,11 +162,11 @@ export default {
             </p>
             <div class="border-t-2 border-gray-300 pt-16"></div>
             <div class="flex flex-row justify-between pt-8">
-              <p
+              <p id="chair-text-1"
                 class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-medium text-left max-w-[calc(24vw)]">
                 /THESE CHAIRS CAN BE
               </p>
-              <p
+              <p id="chair-text-2"
                 class="text-[calc(1.5vw)] leading-[calc(2vw)] tracking-[-0.01vw] font-[200] text-left max-w-[calc(35vw)]">
                 These chairs can be upholstered in just about any fabric you like. When
                 upholstered, the chair&rsquo;s back and seat have exposed veneer on the
