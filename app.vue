@@ -1,15 +1,16 @@
 <script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue';
+import CursorFollower from '~/components/cursorfollower.vue'
 
 // Import Swiper styles
 import 'swiper/css';
-
 
 export default {
   components: {
     Swiper,
     SwiperSlide,
+    CursorFollower
   },
   data() {
     return {
@@ -18,6 +19,21 @@ export default {
   },
   mounted() {
     this.locomotiveScrollInit();
+
+    const { $gsap, $ScrollTrigger } = useNuxtApp()
+    $gsap.to('.header', {
+      scrollTrigger: {
+        trigger: '.header',
+        start: 'top 200px',
+        end: '300%',
+
+        scrub: true,
+        reverse: true,
+        markers: false,
+      },
+      height: '0',
+      duration: '3',
+    })
   },
   methods: {
     locomotiveScrollInit() {
@@ -30,10 +46,19 @@ export default {
       // log scroll instance for debugging
       console.log("LocomotiveScroll instance:", this.scroll);
     },
+    showCursorFollower() {
+      const cursorFollower = document.querySelector('.cursor-follower')
+      cursorFollower.style.display = 'block'
+    },
+    hideCursorFollower() {
+      const cursorFollower = document.querySelector('.cursor-follower')
+      cursorFollower.style.display = 'none'
+    }
   },
 };
 </script>
 <template>
+  <CursorFollower />
   <div data-scroll-container class="overflow-x-hidden">
     <div data-scroll class="mx-[60px] grid grid-cols-9 gap-[30px]">
       <spacing :size64="true" class="col-span-9" />
@@ -44,7 +69,7 @@ export default {
       </nav>
       <header class="col-span-9 pt-[calc(10vw)]">
         <h1
-          class="text-[calc(13vw-1em)] leading-[calc(10vw)] tracking-[calc(-0.2vw-0.01em)] font-[530] whitespace-nowrap text-center">
+          class="text-[calc(13vw-1em)] leading-[calc(10vw)] tracking-[calc(-0.2vw-0.01em)] font-[530] whitespace-nowrap text-center header">
           Maréchal Verchetti
         </h1>
       </header>
@@ -81,7 +106,8 @@ export default {
       </section>
     </div>
     <div class="pt-44">
-      <section class="w-full flex justify-center items-center cursor-grab">
+      <section class="w-full flex justify-center items-center cursor-grab" @mouseenter="showCursorFollower"
+        @mouseleave="hideCursorFollower">
         <swiper :slides-per-view="3" :space-between="38" :slides-offset-before="60" @swiper="onSwiper"
           @slideChange="onSlideChange" draggable="true">
           <swiper-slide>
