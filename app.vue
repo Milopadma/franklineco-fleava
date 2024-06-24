@@ -18,7 +18,10 @@ export default {
     }
   },
   beforeDestroy() {
-    this.scroll.destroy()
+    if (this.scroll) {
+      this.scroll.destroy();
+      this.scroll = null;
+    }
   },
   methods: {
     locomotiveScrollInit() {
@@ -162,6 +165,13 @@ export default {
     this.locomotiveScrollInit();
     this.onLoadAnimation();
     this.scrollAnimation();
+    // re-initialize LocomotiveScroll on page reload
+    window.addEventListener('beforeunload', () => {
+      if (this.scroll) {
+        this.scroll.destroy();
+        this.scroll = null;
+      }
+    });
   },
 };
 </script>
