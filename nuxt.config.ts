@@ -8,7 +8,10 @@ export default defineNuxtConfig({
   ],
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
-  plugins: ["~/plugins/locomotive-scroll.client.js"],
+  plugins: [
+    "~/plugins/locomotive-scroll.client.js",
+    "~/plugins/imagesloaded.client.js",
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},
