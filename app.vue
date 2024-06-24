@@ -103,16 +103,25 @@ export default {
         { value: 'textStaggerAnimation', way: 'enter', selector: '.footer-char-2', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.005 } }
       ];
 
+      const debounce = (func, wait) => {
+        let timeout;
+        return (...args) => {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+      };
+
       animations.forEach(({ value, way, selector, animation }) => {
-        this.scroll.on('call', (callValue, callWay, obj) => {
+        this.scroll.on('call', debounce((callValue, callWay, obj) => {
           if (callValue === value && callWay === way) {
             const elements = obj.el.querySelectorAll(selector);
             if (elements.length > 0) {
               this.$gsap.from(elements, animation);
             }
           }
-        });
+        }, 16)); // 16ms debounce for ~60fps
       });
+
     },
 
     onLoadAnimation() {
