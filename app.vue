@@ -165,6 +165,10 @@ export default {
         navAnimations.forEach(animation => animation.restart());
         chairImageAnimation.restart();
       });
+
+      // set gsap ticker settings
+      this.$gsap.ticker.lagSmoothing(1000, 16);
+      this.$gsap.ticker.fps(120);
     }
   },
   mounted() {
