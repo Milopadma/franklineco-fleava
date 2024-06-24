@@ -61,177 +61,54 @@ export default {
     },
 
     scrollAnimation() {
-      const chairText1 = document.querySelector('#chair-text-1');
-      const chairCharacters1 = chairText1.textContent.split('');
-      chairText1.innerHTML = chairCharacters1.map(char => `<span class="chair-char-1">${char}</span>`).join('');
+      const elements = [
+        { selector: '#chair-text-1', className: 'chair-char-1' },
+        { selector: '#chair-text-2', className: 'chair-char-2' },
+        { selector: '#chair-text-3', className: 'chair-char-3' },
+        { selector: '#chair-text-4', className: 'chair-char-4' },
+        { selector: '#image-text-1', className: 'image-char-1' },
+        { selector: '#image-text-2', className: 'image-char-2' },
+        { selector: '#footer-text', className: 'footer-char' },
+        { selector: '#footer-text-2', className: 'footer-char-2' }
+      ];
 
-      const chairText2 = document.querySelector('#chair-text-2');
-      const chairCharacters2 = chairText2.textContent.split('');
-      chairText2.innerHTML = chairCharacters2.map(char => `<span class="chair-char-2">${char}</span>`).join('');
+      elements.forEach(({ selector, className }) => {
+        const element = document.querySelector(selector);
+        const characters = element.textContent.split('');
+        element.innerHTML = characters.map(char => `<span class="${className}">${char}</span>`).join('');
+      });
 
-      const chairText3 = document.querySelector('#chair-text-3');
-      const chairCharacters3 = chairText3.textContent.split('');
-      chairText3.innerHTML = chairCharacters3.map(char => `<span class="chair-char-3">${char}</span>`).join('');
+      const animations = [
+        { value: 'itemAnimation', way: 'enter', animation: { opacity: 0, y: 60, duration: 2, ease: 'expo.inOut' } },
+        { value: 'textStaggerAnimation', way: 'enter', selector: '.chair-char-1', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.05 } },
+        { value: 'textStaggerAnimation2', way: 'enter', selector: '.chair-char-4', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.005 } },
+        { value: 'textStaggerAnimation2', way: 'enter', selector: '.chair-char-3', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.005 } },
+        { value: 'textStaggerAnimation', way: 'enter', selector: '.chair-char-2', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.005 } },
+        { value: 'swiperSlideAnimation', way: 'enter', selector: '.swiper-slide', animation: { opacity: 0, y: 50, duration: 1.5, ease: 'power2.out', stagger: 0.3 } },
+        { value: 'textStaggerAnimation', way: 'enter', selector: '.new-text-stagger', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.005 } },
+        { value: 'textStaggerAnimation', way: 'enter', selector: '.image-char-1', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.005 } },
+        { value: 'textStaggerAnimation', way: 'enter', selector: '.image-char-2', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.005 } },
+        { value: 'textStaggerAnimation', way: 'enter', selector: '.footer-char', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.005 } },
+        { value: 'textStaggerAnimation', way: 'enter', selector: '.footer-char-2', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.005 } }
+      ];
 
-      const chairText4 = document.querySelector('#chair-text-4');
-      const chairCharacters4 = chairText4.textContent.split('');
-      chairText4.innerHTML = chairCharacters4.map(char => `<span class="chair-char-4">${char}</span>`).join('');
-
-      const imageText1 = document.querySelector('#image-text-1');
-      const imageCharacters1 = imageText1.textContent.split('');
-      imageText1.innerHTML = imageCharacters1.map(char => `<span class="image-char-1">${char}</span>`).join('');
-
-      const imageText2 = document.querySelector('#image-text-2');
-      const imageCharacters2 = imageText2.textContent.split('');
-      imageText2.innerHTML = imageCharacters2.map(char => `<span class="image-char-2">${char}</span>`).join('');
-
-      const footerText = document.querySelector('#footer-text');
-      const footerCharacters = footerText.textContent.split('');
-      footerText.innerHTML = footerCharacters.map(char => `<span class="footer-char">${char}</span>`).join('');
-
-      const footerText2 = document.querySelector('#footer-text-2');
-      const footerCharacters2 = footerText2.textContent.split('');
-      footerText2.innerHTML = footerCharacters2.map(char => `<span class="footer-char-2">${char}</span>`).join('');
+      animations.forEach(({ value, way, selector, animation }) => {
+        this.scroll.on('call', (callValue, callWay, obj) => {
+          if (callValue === value && callWay === way) {
+            const elements = obj.el.querySelectorAll(selector);
+            this.$gsap.from(elements, animation);
+          }
+        });
+      });
 
       this.scroll.on('call', (value, way, obj) => {
         console.log("scroll event:", value, way, obj);
-        if (value === 'itemAnimation') {
-          if (way === 'enter') {
-            this.$gsap.from(obj.el, {
-              opacity: 0,
-              y: 60,
-              duration: 2,
-              ease: 'expo.inOut',
-            });
-          }
-        }
-      });
-
-      this.scroll.on('call', (value, way, obj) => {
-        if (value === 'textStaggerAnimation' && way === 'enter') {
-          const textElements = obj.el.querySelectorAll('.chair-char-1');
-          this.$gsap.from(textElements, {
+        if (value === 'itemAnimation' && way === 'enter') {
+          this.$gsap.from(obj.el, {
             opacity: 0,
-            translateY: 10,
-            duration: 1.5,
-            ease: 'power2.out',
-            stagger: 0.05
-          });
-        }
-      });
-
-      this.scroll.on('call', (value, way, obj) => {
-        if (value === 'textStaggerAnimation2' && way === 'enter') {
-          const textElements = obj.el.querySelectorAll('.chair-char-4');
-          this.$gsap.from(textElements, {
-            opacity: 0,
-            translateY: 10,
-            duration: 1.5,
-            ease: 'power2.out',
-            stagger: 0.005
-          });
-        }
-      });
-      this.scroll.on('call', (value, way, obj) => {
-        if (value === 'textStaggerAnimation2' && way === 'enter') {
-          const textElements = obj.el.querySelectorAll('.chair-char-3');
-          this.$gsap.from(textElements, {
-            opacity: 0,
-            translateY: 10,
-            duration: 1.5,
-            ease: 'power2.out',
-            stagger: 0.005
-          });
-        }
-      });
-
-      this.scroll.on('call', (value, way, obj) => {
-        if (value === 'textStaggerAnimation' && way === 'enter') {
-          const textElements = obj.el.querySelectorAll('.chair-char-2');
-          this.$gsap.from(textElements, {
-            opacity: 0,
-            translateY: 10,
-            duration: 1.5,
-            ease: 'power2.out',
-            stagger: 0.005
-          });
-        }
-      });
-
-      this.scroll.on('call', (value, way, obj) => {
-        if (value === 'swiperSlideAnimation' && way === 'enter') {
-          const swiperSlides = obj.el.querySelectorAll('.swiper-slide');
-          this.$gsap.from(swiperSlides, {
-            opacity: 0,
-            y: 50,
-            duration: 1.5,
-            ease: 'power2.out',
-            stagger: 0.3
-          });
-        }
-      });
-
-      this.scroll.on('call', (value, way, obj) => {
-        if (value === 'textStaggerAnimation' && way === 'enter') {
-          const textElements = obj.el.querySelectorAll('.new-text-stagger');
-          this.$gsap.from(textElements, {
-            opacity: 0,
-            translateY: 10,
-            duration: 1.5,
-            ease: 'power2.out',
-            stagger: 0.005
-          });
-        }
-      });
-
-      this.scroll.on('call', (value, way, obj) => {
-        if (value === 'textStaggerAnimation' && way === 'enter') {
-          const textElements = obj.el.querySelectorAll('.image-char-1');
-          this.$gsap.from(textElements, {
-            opacity: 0,
-            translateY: 10,
-            duration: 1.5,
-            ease: 'power2.out',
-            stagger: 0.005
-          });
-        }
-      });
-
-      this.scroll.on('call', (value, way, obj) => {
-        if (value === 'textStaggerAnimation' && way === 'enter') {
-          const textElements = obj.el.querySelectorAll('.image-char-2');
-          this.$gsap.from(textElements, {
-            opacity: 0,
-            translateY: 10,
-            duration: 1.5,
-            ease: 'power2.out',
-            stagger: 0.005
-          });
-        }
-      });
-
-      this.scroll.on('call', (value, way, obj) => {
-        if (value === 'textStaggerAnimation' && way === 'enter') {
-          const textElements = obj.el.querySelectorAll('.footer-char');
-          this.$gsap.from(textElements, {
-            opacity: 0,
-            translateY: 10,
-            duration: 1.5,
-            ease: 'power2.out',
-            stagger: 0.005
-          });
-        }
-      });
-
-      this.scroll.on('call', (value, way, obj) => {
-        if (value === 'textStaggerAnimation' && way === 'enter') {
-          const textElements = obj.el.querySelectorAll('.footer-char-2');
-          this.$gsap.from(textElements, {
-            opacity: 0,
-            translateY: 10,
-            duration: 1.5,
-            ease: 'power2.out',
-            stagger: 0.005
+            y: 60,
+            duration: 2,
+            ease: 'expo.inOut',
           });
         }
       });
@@ -399,10 +276,10 @@ export default {
     </div>
     <section class="grid grid-cols-9 pt-[calc(10vw)]">
       <div class="relative col-span-9 grid grid-cols-9">
-        <img src="/threechairs.jpg" alt="three chairs" class="w-full col-span-9" data-scroll-speed="2">
+        <img src="/threechairs.jpg" alt="three chairs" class="w-full col-span-9">
         <div class="text-[#C8BEB4] col-span-6 col-start-4 absolute mr-[calc(10vw-1em)] mt-[clamp(2vw,25%,10vw)]">
           <p class="text-[calc(3.5vw)] leading-[calc(3.8vw)] tracking-[-0.01em] font-[530]" id="image-text-1"
-            data-scroll data-scroll-call="textStaggerAnimation" data-scroll-speed="2">
+            data-scroll data-scroll-call="textStaggerAnimation">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maréchal Verchetti is built on a
             legacy of creative partnership. In a first-of-its-kind collaboration, the
             Frankliné Jeremy design house thought fully reimagines eight ●
@@ -410,7 +287,7 @@ export default {
         </div>
         <div class="absolute bottom-16 right-16 text-[#C8BEB4]">
           <p class="text-[calc(1.5vw)] leading-[calc(2vw)] tracking-[-0.01em] font-[300] max-w-[calc(16vw)]"
-            id="image-text-2" data-scroll data-scroll-call="textStaggerAnimation" data-scroll-speed="1">
+            id="image-text-2" data-scroll data-scroll-call="textStaggerAnimation">
             Fresh eyes see new possibilities for classic Eames designs, including a bold new colour palette and
             updated
             materials.
@@ -427,14 +304,17 @@ export default {
         creative partnership. In a first-of-its-kind collaboration, the Danish
         design house HAY</p>
       <div class="relative pt-[calc(10vw)] col-start-1 col-span-9">
-        <img src="/graychairs.jpg" alt="gray chairs" id="gray-chairs-image" data-scroll data-scroll-speed="2">
-        <img src="/graychair.jpg" alt="gray chair" class="absolute bottom-[calc(5vw)] left-[calc(5vw)] w-3/12"
-          id="gray-chair-image" data-scroll data-scroll-speed="1">
+        <img src="/graychairs.jpg" alt="gray chairs" id="gray-chairs-image" data-scroll data-scroll-speed="2"
+          data-scroll-direction="horizontal">
+        <div class="absolute bottom-[calc(5vw)] left-[calc(5vw)] w-3/12">
+          <img src="/graychair.jpg" alt="gray chair" class="w-full" id="gray-chair-image" data-scroll-speed="3"
+            data-scroll-direction="horizontal">
+        </div>
       </div>
       <footer class="col-span-9 col-start-1">
         <h1
           class="text-[calc(12vw-1em)] leading-[calc(12vw)] tracking-[calc(-0.4vw-0.01em)] font-[530] whitespace-nowrap text-center text-[#333333] py-16"
-          id="footer-text-2" data-scroll data-scroll-call="textStaggerAnimation" data-scroll-speed="1">
+          id="footer-text-2" data-scroll data-scroll-call="textStaggerAnimation">
           Another Collective</h1>
       </footer>
     </section>
