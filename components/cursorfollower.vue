@@ -65,5 +65,17 @@ export default {
     mix-blend-mode: difference;
     pointer-events: none;
     transform: translate3d(-50%, -50%, 0);
+    text-align: center;
+    font-size: 1rem;
+    display: flex;
+    /* added to center the text content */
+    justify-content: center;
+    /* added to center the text content */
+    align-items: center;
+    /* added to center the text content */
+    line-height: 1rem;
+    letter-spacing: -0.01rem;
+    font-weight: 200;
+    color: white;
 }
 </style>

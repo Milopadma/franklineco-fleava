@@ -11,13 +11,13 @@
   },
   "dependencies": {
     "@nuxt/fonts": "^0.7.0",
-    "gsap": "^3.12.5",
     "locomotive-scroll": "^4.1.4",
     "nuxt": "^3.12.2",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
+    "@hypernym/nuxt-gsap": "^2.4.2",
     "@nuxtjs/tailwindcss": "latest",
     "autoprefixer": "latest",
     "nuxt-swiper": "latest",
