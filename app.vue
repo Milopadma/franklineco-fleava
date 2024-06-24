@@ -151,7 +151,6 @@ export default {
         delay: 1
       });
 
-
       // restart all animations on mouse click for debugging purposes
       window.addEventListener('click', () => {
         console.log("restarting animations for debugging purposes");
@@ -175,6 +174,7 @@ export default {
   },
 };
 </script>
+
 <template>
   <div data-scroll-container class="overflow-x-hidden">
     <CursorFollower />
@@ -193,7 +193,7 @@ export default {
       </header>
       <section class="col-span-9 flex flex-col">
         <div class="flex items-center flex-col justify-center">
-          <img src="/chair.jpg" alt="chair" id="chair-image" />
+          <img src="/chair.jpg" alt="chair" id="chair-image" loading="lazy" />
         </div>
       </section>
       <section class="col-span-7 col-start-3 flex flex-col">
@@ -232,27 +232,27 @@ export default {
         <swiper :slides-per-view="3" :space-between="38" :slides-offset-before="60" @swiper="onSwiper"
           @slideChange="onSlideChange" draggable="true">
           <swiper-slide>
-            <img src="/eameschair.jpg" alt="chair">
+            <img src="/eameschair.jpg" alt="chair" loading="lazy">
             <p class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9">
               Eames Moulded Plastic Side Chair</p>
           </swiper-slide>
           <swiper-slide>
-            <img src="/eamessofa.jpg" alt="chair">
+            <img src="/eamessofa.jpg" alt="chair" loading="lazy">
             <p class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9">
               Eames Sofa Compact</p>
           </swiper-slide>
           <swiper-slide>
-            <img src="/eameslight.jpg" alt="chair">
+            <img src="/eameslight.jpg" alt="chair" loading="lazy">
             <p class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9">
               Eames Moulded Plastic Armchair</p>
           </swiper-slide>
           <swiper-slide>
-            <img src="/eamessofa.jpg" alt="chair">
+            <img src="/eamessofa.jpg" alt="chair" loading="lazy">
             <p class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9">
               Eames Sofa Compact</p>
           </swiper-slide>
           <swiper-slide>
-            <img src="/eameslight.jpg" alt="chair">
+            <img src="/eameslight.jpg" alt="chair" loading="lazy">
             <p class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9">
               Eames Moulded Plastic Armchair</p>
           </swiper-slide>
@@ -286,7 +286,7 @@ export default {
     </div>
     <section class="grid grid-cols-9 pt-[calc(10vw)]">
       <div class="relative col-span-9 grid grid-cols-9">
-        <img src="/threechairs.jpg" alt="three chairs" class="w-full col-span-9">
+        <img src="/threechairs.jpg" alt="three chairs" class="w-full col-span-9" loading="lazy">
         <div class="text-[#C8BEB4] col-span-6 col-start-4 absolute mr-[calc(10vw-1em)] mt-[clamp(2vw,25%,10vw)]">
           <p class="text-[calc(3.5vw)] leading-[calc(3.8vw)] tracking-[-0.01em] font-[530]" id="image-text-1"
             data-scroll data-scroll-call="textStaggerAnimation">
@@ -315,10 +315,10 @@ export default {
         design house HAY</p>
       <div class="relative pt-[calc(10vw)] col-start-1 col-span-9">
         <img src="/graychairs.jpg" alt="gray chairs" id="gray-chairs-image" data-scroll data-scroll-speed="2"
-          data-scroll-direction="horizontal">
+          data-scroll-direction="horizontal" loading="lazy">
         <div class="absolute bottom-[calc(5vw)] left-[calc(5vw)] w-3/12">
           <img src="/graychair.jpg" alt="gray chair" class="w-full" id="gray-chair-image" data-scroll-speed="3"
-            data-scroll-direction="horizontal">
+            data-scroll-direction="horizontal" loading="lazy">
         </div>
       </div>
       <footer class="col-span-9 col-start-1">
