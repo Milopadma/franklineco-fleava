@@ -36,7 +36,16 @@ export default {
       this.scroll = new this.$LocomotiveScroll({
         el: document.querySelector('[data-scroll-container]'),
         smooth: true,
-        getDirection: true
+        getDirection: true,
+        mobile: {
+          smooth: true,
+          getDirection: true
+        },
+        tablet: {
+          smooth: true,
+          getDirection: true,
+          breakpoint: 0
+        }
       });
 
       // log scroll instance for debugging
