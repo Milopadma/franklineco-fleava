@@ -216,8 +216,8 @@ export default {
           </h1>
         </header>
         <section class="col-span-9 flex flex-col">
-          <div class="flex items-center flex-col justify-center">
-            <img src="/chair.jpg" alt="chair" id="chair-image" placeholder />
+          <div class="flex items-center flex-col justify-center max-h-[calc(80vw)] overflow-clip">
+            <img src="/chair.jpg" alt="chair" id="chair-image" placeholder data-scroll data-scroll-speed="-1" />
           </div>
         </section>
         <section class="col-span-7 col-start-3 flex flex-col">
@@ -309,8 +309,9 @@ export default {
         </section>
       </div>
       <section class="grid grid-cols-9 pt-[calc(10vw)]">
-        <div class="relative col-span-9 grid grid-cols-9">
-          <img src="/threechairs.jpg" alt="three chairs" class="w-full col-span-9" loading="lazy">
+        <div class="relative col-span-9 grid grid-cols-9 overflow-clip max-h-[calc(100vw)]">
+          <img src="/threechairs.jpg" alt="three chairs" class="w-full col-span-9" loading="lazy" data-scroll
+            data-scroll-speed="-1" />
           <div class="text-[#C8BEB4] col-span-6 col-start-4 absolute mr-[calc(10vw-1em)] mt-[clamp(2vw,25%,10vw)]">
             <p class="text-[calc(3.5vw)] leading-[calc(3.8vw)] tracking-[-0.01em] font-[530] cursor-default"
               id="image-text-1" data-scroll data-scroll-call="textStaggerAnimation">
@@ -338,11 +339,12 @@ export default {
           creative partnership. In a first-of-its-kind collaboration, the Danish
           design house HAY</p>
         <div class="relative pt-[calc(10vw)] col-start-1 col-span-9">
-          <img src="/graychairs.jpg" alt="gray chairs" id="gray-chairs-image" data-scroll data-scroll-speed="2"
-            data-scroll-direction="horizontal" loading="lazy" />
-          <div class="absolute bottom-[calc(5vw)] left-[calc(5vw)] w-3/12">
-            <img src="/graychair.jpg" alt="gray chair" class="w-full" id="gray-chair-image" data-scroll-speed="3"
-              data-scroll-direction="horizontal" loading="lazy" />
+          <div class="overflow-clip max-h-[calc(50vw)] flex justify-center items-center">
+            <img src="/graychairs.jpg" alt="gray chairs" id="gray-chairs-image" data-scroll data-scroll-speed="-1"
+              loading="lazy" />
+          </div>
+          <div class="absolute bottom-[calc(5vw)] left-[calc(5vw)] w-3/12" data-scroll data-scroll-speed="-2">
+            <img src="/graychair.jpg" alt="gray chair" class="w-full" id="gray-chair-image" />
           </div>
         </div>
         <footer class="col-span-9 col-start-1">
