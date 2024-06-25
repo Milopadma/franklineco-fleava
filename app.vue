@@ -198,6 +198,7 @@ export default {
 </script>
 
 <template>
+  <SpeedInsights />
   <CursorFollower />
   <SmoothScroll>
     <div class="overflow-x-hidden">
