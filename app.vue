@@ -89,7 +89,7 @@ export default {
         { selector: '#image-text-1', className: 'image-char-1' },
         { selector: '#image-text-2', className: 'image-char-2' },
         { selector: '#footer-text', className: 'footer-char' },
-        { selector: '#footer-text-2', className: 'footer-char-2' }
+        { selector: '#footer-text-2', className: 'footer-text-2' }
       ];
 
       elements.forEach(({ selector, className }) => {
@@ -109,7 +109,7 @@ export default {
         { value: 'textStaggerAnimation', way: 'enter', selector: '.image-char-1', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.005 } },
         { value: 'textStaggerAnimation', way: 'enter', selector: '.image-char-2', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.005 } },
         { value: 'textStaggerAnimation', way: 'enter', selector: '.footer-char', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.005 } },
-        { value: 'textStaggerAnimation', way: 'enter', selector: '.footer-char-2', animation: { opacity: 0, translateY: 10, duration: 1.5, ease: 'power2.out', stagger: 0.005 } }
+        { value: 'footerTextAnimation', way: 'enter', selector: '.footer-text-2', animation: { opacity: 0, translateY: 100, duration: 1.5, ease: 'power2.out', stagger: 0.005 } }
       ];
 
       const debounce = (func, wait) => {
@@ -167,13 +167,14 @@ export default {
         delay: 1
       });
 
-      // restart all animations on mouse click for debugging purposes
-      window.addEventListener('click', () => {
-        console.log("restarting animations for debugging purposes");
-        headerAnimation.restart();
-        navAnimations.forEach(animation => animation.restart());
-        chairImageAnimation.restart();
+      const chairTextAnimation = this.$gsap.from('#chair-text', {
+        opacity: 0,
+        y: 50,
+        duration: 1.5,
+        ease: 'power2.out',
+        delay: 1.8
       });
+
 
       // set gsap ticker settings
       this.$gsap.ticker.lagSmoothing(1000, 16);
@@ -346,7 +347,7 @@ export default {
         <footer class="col-span-9 col-start-1">
           <h1
             class="text-[calc(12vw-1em)] leading-[calc(12vw)] tracking-[calc(-0.4vw-0.01em)] font-[530] whitespace-nowrap text-center text-[#333333] py-16 cursor-default"
-            id="footer-text-2" data-scroll data-scroll-call="textStaggerAnimation">
+            id="footer-text-2" data-scroll data-scroll-call="footerTextAnimation">
             Another Collective</h1>
         </footer>
       </section>
