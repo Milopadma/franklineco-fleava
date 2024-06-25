@@ -6,11 +6,12 @@ export default defineNuxtConfig({
     "nuxt-swiper",
     "@hypernym/nuxt-gsap",
   ],
+  pages: true,
   devtools: { enabled: true },
   css: ["~/assets/css/main.css"],
   plugins: [
-    "~/plugins/locomotive-scroll.client.js",
-    "~/plugins/imagesloaded.client.js",
+    "~/plugins/locomotive-scroll.client.ts",
+    "~/plugins/imagesloaded.client.ts",
   ],
   postcss: {
     plugins: {
