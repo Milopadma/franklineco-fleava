@@ -12,12 +12,12 @@ export default {
         setCursorAnimation() {
             /**
              * Mouse Follower (GSAP3)
-             * Code by Blake Bowen
+             * code by Blake Bowen
              * @link https://codepen.io/osublake/pen/dce29f9c14192035dbf55a32181f0bdc
              */
             const gsap = this.$gsap
             const cursorFollower = document.querySelector('.cursor-follower')
-            const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 }
+            const pos = { x: window.innerWidth, y: window.innerHeight }
             const mouse = { x: pos.x, y: pos.y }
             const speed = 0.13
             const fpms = 60 / 1000
