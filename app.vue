@@ -188,9 +188,9 @@ export default {
 </script>
 
 <template>
+  <CursorFollower />
   <SmoothScroll>
     <div class="overflow-x-hidden">
-      <CursorFollower />
       <div data-scroll class="mx-[60px] grid grid-cols-9 gap-[30px]">
         <spacing :size64="true" class="col-span-9" />
         <nav class="col-span-9 flex justify-between font-[530] tracking-[-0.01em]">
