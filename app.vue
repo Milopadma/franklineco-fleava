@@ -194,13 +194,13 @@ export default {
       <div data-scroll class="mx-[60px] grid grid-cols-9 gap-[30px]">
         <spacing :size64="true" class="col-span-9" />
         <nav class="col-span-9 flex justify-between font-[530] tracking-[-0.01em]">
-          <div id="nav-logo">Frankliné&Co.</div>
-          <div id="nav-links" class="min-w-[35vw]">Products, Solutions, Stories </div>
-          <div id="nav-menu">Menu</div>
+          <div id="nav-logo" class="cursor-default">Frankliné&Co.</div>
+          <div id="nav-links" class="min-w-[35vw] cursor-default">Products, Solutions, Stories </div>
+          <div id="nav-menu" class="cursor-default">Menu</div>
         </nav>
         <header class="col-span-9 pt-[calc(10vw)]">
           <h1 id="header"
-            class="text-[calc(13vw-1em)] leading-[calc(10vw)] tracking-[calc(-0.2vw-0.01em)] font-[530] whitespace-nowrap text-center">
+            class="text-[calc(13vw-1em)] leading-[calc(10vw)] tracking-[calc(-0.2vw-0.01em)] font-[530] whitespace-nowrap text-center cursor-default">
             Maréchal Verchetti
           </h1>
         </header>
@@ -212,7 +212,7 @@ export default {
         <section class="col-span-7 col-start-3 flex flex-col">
           <div class="w-full flex flex-col justify-end items-end">
             <div class="flex flex-col justify-end pt-[calc(4vw)]">
-              <p class="text-[calc(4.8vw)] leading-[calc(4.8vw)] tracking-[-0.01em] font-[530] text-left pb-4"
+              <p class="text-[calc(4.8vw)] leading-[calc(4.8vw)] tracking-[-0.01em] font-[530] text-left pb-4 cursor-default"
                 id="chair-text" data-scroll data-scroll-call="itemAnimation">
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maréchal Verchetti is built on a
                 legacy
@@ -223,12 +223,12 @@ export default {
               <div class="border-t-2 border-gray-300 pt-16"></div>
               <div class="flex flex-row justify-between pt-8">
                 <p id="chair-text-1"
-                  class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-medium text-left max-w-[calc(24vw)]"
+                  class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-medium text-left max-w-[calc(24vw)] cursor-default"
                   data-scroll data-scroll-call="textStaggerAnimation">
                   /THESE CHAIRS CAN BE
                 </p>
                 <p id="chair-text-2"
-                  class="text-[calc(1.5vw)] leading-[calc(2vw)] tracking-[-0.01vw] font-[200] text-left max-w-[calc(35vw)]"
+                  class="text-[calc(1.5vw)] leading-[calc(2vw)] tracking-[-0.01vw] font-[200] text-left max-w-[calc(35vw)] cursor-default"
                   data-scroll data-scroll-call="textStaggerAnimation">
                   These chairs can be upholstered in just about any fabric you like. When
                   upholstered, the chair&rsquo;s back and seat have exposed veneer on the
@@ -277,17 +277,17 @@ export default {
           <div class="w-full flex flex-col justify-start items-start">
             <div class="flex flex-col justify-end pt-[calc(4vw)] max-w-[calc(88vw)]">
               <h2
-                class="text-[calc(25vw)] leading-[calc(25vw)] tracking-[-0.01em] font-[530] text-left whitespace-nowrap -translate-x-96"
+                class="text-[calc(25vw)] leading-[calc(25vw)] tracking-[-0.01em] font-[530] text-left whitespace-nowrap -translate-x-96 cursor-default"
                 data-scroll data-scroll-repeat data-scroll-speed="48" data-scroll-direction="horizontal">
                 Fine forms, — Refined.
                 Fine forms, — Refined.
               </h2>
               <div class="flex flex-row justify-between pt-16">
-                <p class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left max-w-[calc(24vw)]"
+                <p class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left max-w-[calc(24vw)] cursor-default"
                   id="chair-text-3" data-scroll data-scroll-call="textStaggerAnimation2">
                   /THESE CHAIRS CAN BE
                 </p>
-                <p class="text-[calc(1.5vw)] leading-[calc(2vw)] tracking-[-0.01vw] font-[200] text-left max-w-[calc(25vw)] mr-[calc(5vw)] new-text-stagger"
+                <p class="text-[calc(1.5vw)] leading-[calc(2vw)] tracking-[-0.01vw] font-[200] text-left max-w-[calc(25vw)] mr-[calc(5vw)] new-text-stagger cursor-default"
                   id="chair-text-4" data-scroll data-scroll-call="textStaggerAnimation2">
                   Fresh eyes see new possibilities for classic Eames designs, including a bold new colour palette and
                   updated materials.
@@ -301,15 +301,15 @@ export default {
         <div class="relative col-span-9 grid grid-cols-9">
           <img src="/threechairs.jpg" alt="three chairs" class="w-full col-span-9" loading="lazy">
           <div class="text-[#C8BEB4] col-span-6 col-start-4 absolute mr-[calc(10vw-1em)] mt-[clamp(2vw,25%,10vw)]">
-            <p class="text-[calc(3.5vw)] leading-[calc(3.8vw)] tracking-[-0.01em] font-[530]" id="image-text-1"
-              data-scroll data-scroll-call="textStaggerAnimation">
+            <p class="text-[calc(3.5vw)] leading-[calc(3.8vw)] tracking-[-0.01em] font-[530] cursor-default"
+              id="image-text-1" data-scroll data-scroll-call="textStaggerAnimation">
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Maréchal Verchetti is built on a
               legacy of creative partnership. In a first-of-its-kind collaboration, the
               Frankliné Jeremy design house thought fully reimagines eight ●
             </p>
           </div>
           <div class="absolute bottom-16 right-16 text-[#C8BEB4]">
-            <p class="text-[calc(1.5vw)] leading-[calc(2vw)] tracking-[-0.01em] font-[300] max-w-[calc(16vw)]"
+            <p class="text-[calc(1.5vw)] leading-[calc(2vw)] tracking-[-0.01em] font-[300] max-w-[calc(16vw)] cursor-default"
               id="image-text-2" data-scroll data-scroll-call="textStaggerAnimation">
               Fresh eyes see new possibilities for classic Eames designs, including a bold new colour palette and
               updated
@@ -319,7 +319,7 @@ export default {
         </div>
       </section>
       <section class="grid grid-cols-9 pt-[calc(10vw)] mx-[60px]">
-        <p class="text-[calc(5vw)] leading-[calc(5vw)] tracking-[-0.01em] font-[530] col-start-1 col-span-7"
+        <p class="text-[calc(5vw)] leading-[calc(5vw)] tracking-[-0.01em] font-[530] col-start-1 col-span-7 cursor-default"
           id="footer-text" data-scroll data-scroll-call="textStaggerAnimation">
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Herman
           Miller is
@@ -336,7 +336,7 @@ export default {
         </div>
         <footer class="col-span-9 col-start-1">
           <h1
-            class="text-[calc(12vw-1em)] leading-[calc(12vw)] tracking-[calc(-0.4vw-0.01em)] font-[530] whitespace-nowrap text-center text-[#333333] py-16"
+            class="text-[calc(12vw-1em)] leading-[calc(12vw)] tracking-[calc(-0.4vw-0.01em)] font-[530] whitespace-nowrap text-center text-[#333333] py-16 cursor-default"
             id="footer-text-2" data-scroll data-scroll-call="textStaggerAnimation">
             Another Collective</h1>
         </footer>
