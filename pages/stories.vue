@@ -123,21 +123,6 @@ export default {
         delay: 1,
       });
 
-      const navElements = document.querySelectorAll(
-        "#nav-logo, #nav-links, #nav-menu"
-      );
-      const navAnimations = [];
-      navElements.forEach((element, index) => {
-        const animation = this.$gsap.from(element, {
-          opacity: 0,
-          y: 50, // slide in from bottom
-          duration: 1.5,
-          ease: "power2.out",
-          delay: 1 + index * 0.3, // add 1 second delay from anim start
-        });
-        navAnimations.push(animation);
-      });
-
       this.$gsap.from("#line-1", {
         scaleX: 0,
         transformOrigin: "left",
@@ -253,7 +238,7 @@ export default {
 
 <template>
   <SpeedInsights />
-  <CursorFollower />
+  <CursorFollower ref="cursorFollower" />
   <SmoothScroll>
     <div class="overflow-x-hidden">
       <div data-scroll class="mx-[60px] grid grid-cols-9 gap-[30px]">
@@ -278,7 +263,7 @@ export default {
             </p>
           </div>
         </section>
-        <section class="col-span-2 col-start-4 opacity-0 translate-y-10" id="image">
+        <section class="col-span-2 col-start-4 opacity-0 translate-y-10 flex justify-center items-center" id="image">
           <img src="/chair.jpg" alt="">
         </section>
         <section class="col-span-4 col-start-6 flex flex-col">
