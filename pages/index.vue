@@ -584,7 +584,7 @@ export default {
             />
           </div>
         </div>
-        <footer class="col-span-9 col-start-1">
+        <footer class="col-span-9 col-start-1 pb-16">
           <h1
             class="text-[calc(12vw-1em)] leading-[calc(12vw)] tracking-[calc(-0.4vw-0.01em)] font-[530] whitespace-nowrap text-center text-[#333333] py-16 cursor-default"
             id="footer-text-2"
