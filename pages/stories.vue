@@ -257,20 +257,6 @@ export default {
   <SmoothScroll>
     <div class="overflow-x-hidden">
       <div data-scroll class="mx-[60px] grid grid-cols-9 gap-[30px]">
-        <spacing :size64="true" class="col-span-9" />
-        <nav class="col-span-9 flex justify-between font-[530] tracking-[-0.01em]">
-          <div id="nav-logo" class="cursor-default">Frankliné&Co.</div>
-          <div class="min-w-[35vw] flex flex-row">
-            <div id="nav-links" class="cursor-default opacity-20">
-              Products, &nbsp;
-            </div>
-            <div id="nav-links" class="cursor-default opacity-20">
-              Solutions, &nbsp;
-            </div>
-            <div id="nav-links" class="cursor-pointer">• Stories</div>
-          </div>
-          <div id="nav-menu" class="cursor-default">Menu</div>
-        </nav>
         <header class="col-span-9 pt-[calc(10vw)] overflow-clip">
           <h1 id="header"
             class="text-[calc(13vw-1em)] leading-[calc(10vw)] tracking-[calc(-0.2vw-0.01em)] font-[530] whitespace-nowrap text-center cursor-default">

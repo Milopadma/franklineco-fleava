@@ -202,13 +202,7 @@ export default {
   <CursorFollower />
   <SmoothScroll>
     <div class="overflow-x-hidden">
-      <div data-scroll class="mx-[60px] grid grid-cols-9 gap-[30px]">
-        <spacing :size64="true" class="col-span-9" />
-        <nav class="col-span-9 flex justify-between font-[530] tracking-[-0.01em]">
-          <div id="nav-logo" class="cursor-default">Frankliné&Co.</div>
-          <div id="nav-links" class="min-w-[35vw] cursor-default">Products, Solutions, Stories </div>
-          <div id="nav-menu" class="cursor-default">Menu</div>
-        </nav>
+      <div class="mx-[60px] grid grid-cols-9 gap-[30px]">
         <header class="col-span-9 pt-[calc(10vw)]">
           <h1 id="header"
             class="text-[calc(13vw-1em)] leading-[calc(10vw)] tracking-[calc(-0.2vw-0.01em)] font-[530] whitespace-nowrap text-center cursor-default">
