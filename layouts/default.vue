@@ -57,8 +57,8 @@ export default {
 };
 </script>
 
-<style scoped>
+<!-- <style scoped>
 #main-nav {
   mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 }
-</style>
+</style> -->
