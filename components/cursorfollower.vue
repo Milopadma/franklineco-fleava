@@ -66,28 +66,28 @@ export default {
     },
     changeCursorToImage() {
       const cursorFollower = document.querySelector(".cursor-follower");
-      this.$gsap.to(cursorFollower, {
-        backgroundImage: "url(/eameschair.jpg)",
-        backgroundSize: "cover",
-        borderRadius: "0%",
-        width: "10rem",
-        height: "10rem",
-        mixBlendMode: "normal",
-        duration: 0.2,
-        ease: "sine.out",
-      });
+      //   this.$gsap.to(cursorFollower, {
+      //     backgroundImage: "url(/eameschair.jpg)",
+      //     backgroundSize: "cover",
+      //     borderRadius: "0%",
+      //     width: "10rem",
+      //     height: "10rem",
+      //     mixBlendMode: "normal",
+      //     duration: 0.2,
+      //     ease: "sine.out",
+      //   });
     },
     resetCursor() {
       const cursorFollower = document.querySelector(".cursor-follower");
-      this.$gsap.to(cursorFollower, {
-        backgroundImage: "none",
-        borderRadius: "50%",
-        width: "3.3rem",
-        height: "3.3rem",
-        mixBlendMode: "difference",
-        duration: 0.5,
-        ease: "power2.out",
-      });
+      //   this.$gsap.to(cursorFollower, {
+      //     backgroundImage: "none",
+      //     borderRadius: "50%",
+      //     width: "3.3rem",
+      //     height: "3.3rem",
+      //     mixBlendMode: "difference",
+      //     duration: 0.5,
+      //     ease: "power2.out",
+      //   });
     },
   },
 };
