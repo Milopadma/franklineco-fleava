@@ -3,7 +3,7 @@
     <!-- <spacing :size64="true" class="col-span-9" /> -->
     <nav
       id="main-nav"
-      class="col-span-9 flex justify-between font-[530] tracking-[-0.01em] relative bg-[hsla(0,0%,100%,0.5)] z-50 backdrop-blur-md pt-16 pb-6"
+      class="col-span-9 flex justify-between font-[530] tracking-[-0.01em] relative bg-[hsla(0,0%,100%,0.4)] z-50 backdrop-blur-md pt-16 pb-4"
     >
       <NuxtLink to="/" id="nav-logo" class="cursor-pointer ml-[60px]"
         >Frankliné&Co.</NuxtLink
