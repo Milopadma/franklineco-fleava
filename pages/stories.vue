@@ -36,6 +36,7 @@ export default {
         () => {
           console.log("images loaded");
           this.scroll.update();
+          this.onLoadAnimation();
         }
       );
     },
@@ -232,13 +233,15 @@ export default {
     optionClick(option) {
       this.optionClicked = this.optionClicked === option ? null : option;
       if (this.optionClicked === null) {
+        // hide content
         const showSubHeaderTimeline = this.$gsap.timeline();
         this.scroll.update();
-        this.scroll.scrollTo("#header".getBoundingClientRect().top - 100);
+        this.scroll.scrollTo("#header", { offset: -200, duration: 1000 });
         showSubHeaderTimeline
           .to(["#subheader-number", "#subheader-image", "#subheader-subtext"], {
             clipPath: "inset(0% 0% 0% 0%)",
             height: "auto",
+            opacity: 1,
             duration: 0.5,
             ease: "power2.out",
           })
@@ -249,17 +252,16 @@ export default {
             ease: "power2",
           });
       } else {
+        // show content
         const hideSubHeaderTimeline = this.$gsap.timeline();
-        // set height separately from animation
         document.querySelector("#bigImageSection").style.height = "auto";
+        const refOption = this.$refs["option-1"];
         this.scroll.update();
-        const refOption = this.$refs[option];
-        console.log(refOption);
-        this.scroll.scrollTo(refOption);
+        this.scroll.scrollTo(refOption, { offset: -322, duration: 1000 });
         hideSubHeaderTimeline
           .to(["#subheader-number", "#subheader-image", "#subheader-subtext"], {
             clipPath: "inset(0% 0% 100% 0%)",
-            height: "auto",
+            height: 0,
             opacity: 0,
             duration: 0.5,
             ease: "power2.out",
@@ -276,7 +278,6 @@ export default {
   mounted() {
     this.locomotiveScrollInit();
     this.initCheckImagesLoaded();
-    this.onLoadAnimation();
     // re-initialize LocomotiveScroll on page reload
     window.addEventListener("beforeunload", () => {
       if (this.scroll) {
@@ -371,7 +372,7 @@ export default {
           :class="
             optionClicked === 'option-1' || optionClicked === null
               ? 'opacity-100 h-auto'
-              : 'opacity-0 h-0'
+              : 'opacity-0 hidden'
           "
         >
           <div class="grid grid-cols-9 gap-[30px] pt-4">
@@ -391,7 +392,7 @@ export default {
           :class="
             optionClicked === 'option-2' || optionClicked === null
               ? 'opacity-100 h-auto'
-              : 'opacity-0 h-0'
+              : 'opacity-0 hidden'
           "
         >
           <div class="grid grid-cols-9 gap-[30px] pt-4">
@@ -411,7 +412,7 @@ export default {
           :class="
             optionClicked === 'option-3' || optionClicked === null
               ? 'opacity-100 h-auto'
-              : 'opacity-0 h-0'
+              : 'opacity-0 hidden'
           "
         >
           <div class="grid grid-cols-9 gap-[30px] pt-4">
@@ -432,7 +433,7 @@ export default {
           :class="
             optionClicked === 'option-4' || optionClicked === null
               ? 'opacity-100 h-auto'
-              : 'opacity-0 h-0'
+              : 'opacity-0 hidden'
           "
         >
           <div class="grid grid-cols-9 gap-[30px] pt-4">
