@@ -20,7 +20,7 @@ export default {
     return {
       scroll: null,
       optionClicked: null,
-      hoveredImage: "", // add this line
+      hoveredImage: "",
     };
   },
   beforeDestroy() {
@@ -34,7 +34,6 @@ export default {
       this.$imagesloaded(
         document.querySelectorAll("[data-scroll-container]"),
         () => {
-          console.log("images loaded");
           this.scroll.update();
           this.onLoadAnimation();
         }
@@ -55,9 +54,6 @@ export default {
           breakpoint: 0,
         },
       });
-
-      // log scroll instance for debugging
-      console.log("LocomotiveScroll instance:", this.scroll);
 
       // Add ResizeObserver to update scroll on resize
       new ResizeObserver(() => this.scroll.update()).observe(
@@ -180,7 +176,6 @@ export default {
     optionHover(option, imageUrl) {
       let refOption1 = this.$refs[option];
       let refOption1Child = refOption1.children[0];
-      console.log("hovered option:", refOption1);
       this.hoveredImage = imageUrl; // set the image URL
       this.$gsap.to("#subheader-image", {
         opacity: 1,
@@ -232,9 +227,11 @@ export default {
     },
     optionClick(option) {
       this.optionClicked = this.optionClicked === option ? null : option;
+      console.log("option clicked:", this.optionClicked);
       if (this.optionClicked === null) {
         // hide content
         const showSubHeaderTimeline = this.$gsap.timeline();
+        document.querySelector("#bigImageSection").style.height = "0";
         this.scroll.update();
         this.scroll.scrollTo("#header", { offset: -200, duration: 1000 });
         showSubHeaderTimeline
@@ -247,15 +244,16 @@ export default {
           })
           .to("#bigImageSection", {
             clipPath: "inset(0% 0% 100% 0%)",
-            height: 0,
+            opacity: 0,
+            display: "none",
             duration: 1,
             ease: "power2",
           });
       } else {
         // show content
         const hideSubHeaderTimeline = this.$gsap.timeline();
-        document.querySelector("#bigImageSection").style.height = "auto";
         const refOption = this.$refs["option-1"];
+        document.querySelector("#bigImageSection").style.display = "block";
         this.scroll.update();
         this.scroll.scrollTo(refOption, { offset: -322, duration: 1000 });
         hideSubHeaderTimeline
@@ -271,6 +269,7 @@ export default {
             opacity: 1,
             duration: 0.5,
             ease: "power2.out",
+            height: "auto",
           });
       }
     },
@@ -360,8 +359,8 @@ export default {
       </div>
       <section
         :class="[
-          'col-span-9 col-start-1 mx-[60px] pb-12',
-          optionClicked ? 'pt-0 pb-2' : 'pt-12 pb-12',
+          'col-span-9 col-start-1 mx-[60px] pb-24',
+          optionClicked ? 'pt-0 pb-2' : 'pt-12',
         ]"
       >
         <div
@@ -446,10 +445,13 @@ export default {
           <div class="border-b-2 border-b-black pt-4" id="line-5"></div>
         </div>
       </section>
-      <section id="bigImageSection" class="bg-[#151611] h-0 overflow-clip">
+      <section
+        id="bigImageSection"
+        class="bg-[#151611] overflow-clip hidden opacity-0"
+      >
         <div class="overflow-clip">
           <img
-            src="/bigchair.jpg"
+            src="/public/bigchair.jpg"
             alt=""
             data-scroll
             data-scroll-speed="-1"

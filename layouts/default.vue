@@ -15,8 +15,8 @@
           class="cursor-pointer relative"
           @click="animateLinks"
         >
-          <span v-if="selectedLink === 'products'" class="circle"></span>
-          Products, &nbsp;
+          <span v-if="selectedLink === 'products,'" class="circle mr-1"></span>
+          <span id="nav-links-text">Products,</span><span>&nbsp;</span>
         </NuxtLink>
         <NuxtLink
           to="/solutions"
@@ -24,8 +24,8 @@
           class="cursor-pointer relative"
           @click="animateLinks"
         >
-          <span v-if="selectedLink === 'solutions'" class="circle"></span>
-          Solutions, &nbsp;
+          <span v-if="selectedLink === 'solutions,'" class="circle mr-1"></span>
+          <span id="nav-links-text">Solutions,</span><span>&nbsp;</span>
         </NuxtLink>
         <NuxtLink
           to="/stories"
@@ -35,8 +35,8 @@
           @mouseleave="resetCursor"
           @click="animateLinks"
         >
-          <span v-if="selectedLink === 'stories'" class="circle"></span>
-          Stories
+          <span v-if="selectedLink === 'stories'" class="circle mr-1"></span>
+          <span id="nav-links-text">Stories</span>
         </NuxtLink>
       </div>
       <div id="nav-menu" class="cursor-default mr-[60px]">Menu</div>
@@ -83,18 +83,14 @@ export default {
         console.log("cursorFollower ref is not defined");
       }
     },
-    animateLinks(event) {
-      const links = document.querySelectorAll("#nav-links");
-      // reset opacity for all links
-      gsap.to(links, { opacity: 1, duration: 0 });
-      links.forEach((link) => {
-        if (event && link !== event.target) {
-          gsap.to(link, { opacity: 0.2, duration: 0.5 });
-        } else if (
-          !event &&
-          link.textContent.trim().toLowerCase() === this.selectedLink
-        ) {
-          gsap.to(link, { opacity: 1, duration: 0.5 });
+    animateLinks() {
+      const linkTexts = document.querySelectorAll("#nav-links-text");
+      gsap.to(linkTexts, { opacity: 1, duration: 0 });
+      linkTexts.forEach((linkText) => {
+        if (linkText.textContent.trim().toLowerCase() !== this.selectedLink) {
+          gsap.to(linkText, { opacity: 0.2, duration: 0.5 });
+        } else {
+          gsap.to(linkText, { opacity: 1, duration: 0.5 });
         }
       });
 
@@ -105,11 +101,14 @@ export default {
     checkCurrentUrl() {
       const path = window.location.pathname;
       if (path.includes("products")) {
-        this.selectedLink = "products";
+        this.selectedLink = "products,";
+        this.animateLinks();
       } else if (path.includes("solutions")) {
-        this.selectedLink = "solutions";
+        this.selectedLink = "solutions,";
+        this.animateLinks();
       } else if (path.includes("stories")) {
         this.selectedLink = "stories";
+        this.animateLinks();
       } else {
         this.selectedLink = null;
       }
