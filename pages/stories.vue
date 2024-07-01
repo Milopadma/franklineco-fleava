@@ -233,6 +233,8 @@ export default {
       this.optionClicked = this.optionClicked === option ? null : option;
       if (this.optionClicked === null) {
         const showSubHeaderTimeline = this.$gsap.timeline();
+        this.scroll.update();
+        this.scroll.scrollTo("#header".getBoundingClientRect().top - 100);
         showSubHeaderTimeline
           .to(["#subheader-number", "#subheader-image", "#subheader-subtext"], {
             clipPath: "inset(0% 0% 0% 0%)",
@@ -245,30 +247,28 @@ export default {
             height: 0,
             duration: 1,
             ease: "power2",
-            onComplete: () => {
-              this.scroll.update();
-              this.scroll.scrollTo("#header".getBoundingClientRect().top - 100);
-            },
           });
       } else {
         const hideSubHeaderTimeline = this.$gsap.timeline();
+        // set height separately from animation
+        document.querySelector("#bigImageSection").style.height = "auto";
+        this.scroll.update();
+        const refOption = this.$refs[option];
+        console.log(refOption);
+        this.scroll.scrollTo(refOption);
         hideSubHeaderTimeline
           .to(["#subheader-number", "#subheader-image", "#subheader-subtext"], {
             clipPath: "inset(0% 0% 100% 0%)",
-            height: 0,
+            height: "auto",
+            opacity: 0,
             duration: 0.5,
             ease: "power2.out",
           })
           .to("#bigImageSection", {
-            height: "auto",
             clipPath: "inset(0% 0% 0% 0%)",
+            opacity: 1,
             duration: 0.5,
             ease: "power2.out",
-          })
-          .add(() => {
-            this.scroll.update();
-            const refOption = this.$refs[option];
-            this.scroll.scrollTo(refOption.getBoundingClientRect().top - 100);
           });
       }
     },
@@ -446,13 +446,13 @@ export default {
         </div>
       </section>
       <section id="bigImageSection" class="bg-[#151611] h-0 overflow-clip">
-        <div class="h-5/6 overflow-clip">
+        <div class="overflow-clip">
           <img
             src="/bigchair.jpg"
             alt=""
             data-scroll
             data-scroll-speed="-1"
-            class="object-cover object-center"
+            class="object-cover object-center h-[calc(50vh)] w-full"
           />
         </div>
         <section class="mx-[60px] grid grid-cols-9 gap-[30px] py-24">
