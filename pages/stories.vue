@@ -3,6 +3,7 @@
 import { Swiper, SwiperSlide } from "swiper/vue";
 import CursorFollower from "~/components/cursorfollower.vue";
 import SmoothScroll from "~/components/smoothscroll.vue";
+import { SpeedInsights } from "@vercel/speed-insights/vue";
 
 // Import Swiper styles
 import "swiper/css";
@@ -13,11 +14,13 @@ export default {
     SwiperSlide,
     CursorFollower,
     SmoothScroll,
+    SpeedInsights,
   },
   data() {
     return {
       scroll: null,
       optionClicked: null,
+      hoveredImage: "", // add this line
     };
   },
   beforeDestroy() {
@@ -173,10 +176,11 @@ export default {
       this.$gsap.ticker.lagSmoothing(1000, 16);
       this.$gsap.ticker.fps(120);
     },
-    optionHover(option) {
+    optionHover(option, imageUrl) {
       let refOption1 = this.$refs[option];
       let refOption1Child = refOption1.children[0];
       console.log("hovered option:", refOption1);
+      this.hoveredImage = imageUrl; // set the image URL
       this.$gsap.to("#subheader-image", {
         opacity: 1,
         translateY: 0,
@@ -228,88 +232,51 @@ export default {
     optionClick(option) {
       this.optionClicked = this.optionClicked === option ? null : option;
       if (this.optionClicked === null) {
-        this.animateShowSubHeaderSection();
-        this.animateHideBigImageSection();
+        const showSubHeaderTimeline = this.$gsap.timeline();
+        showSubHeaderTimeline
+          .to(["#subheader-number", "#subheader-image", "#subheader-subtext"], {
+            clipPath: "inset(0% 0% 0% 0%)",
+            height: "auto",
+            duration: 0.5,
+            ease: "power2.out",
+          })
+          .to("#bigImageSection", {
+            clipPath: "inset(0% 0% 100% 0%)",
+            height: 0,
+            duration: 1,
+            ease: "power2",
+            onComplete: () => {
+              this.scroll.update();
+              this.scroll.scrollTo("#header".getBoundingClientRect().top - 100);
+            },
+          });
       } else {
-        this.animateHideSubHeaderSection();
-        this.animateShowBigImageSection();
-        this.scrollToOption(option);
+        const hideSubHeaderTimeline = this.$gsap.timeline();
+        hideSubHeaderTimeline
+          .to(["#subheader-number", "#subheader-image", "#subheader-subtext"], {
+            clipPath: "inset(0% 0% 100% 0%)",
+            height: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          })
+          .to("#bigImageSection", {
+            height: "auto",
+            clipPath: "inset(0% 0% 0% 0%)",
+            duration: 0.5,
+            ease: "power2.out",
+          })
+          .add(() => {
+            this.scroll.update();
+            const refOption = this.$refs[option];
+            this.scroll.scrollTo(refOption.getBoundingClientRect().top - 100);
+          });
       }
     },
-    scrollToOption(option) {
-      const refOption = this.$refs[option];
-      console.log("refop", refOption);
-      this.scroll.scrollTo("#option-4");
-    },
-    animateShowSubHeaderSection() {
-      this.$gsap.to(
-        ["#subheader-number", "#subheader-image", "#subheader-subtext"],
-        {
-          clipPath: "inset(0% 0% 0% 0%)",
-          height: "auto",
-          duration: 0.5,
-          ease: "power2.out",
-        }
-      );
-      this.$nextTick(() => {
-        this.scroll.update();
-      });
-    },
-    animateHideSubHeaderSection() {
-      this.$gsap.to(
-        ["#subheader-number", "#subheader-image", "#subheader-subtext"],
-        {
-          clipPath: "inset(0% 0% 100% 0%)",
-          height: 0,
-          duration: 0.5,
-          ease: "power2.out",
-        }
-      );
-      this.$nextTick(() => {
-        this.scroll.update();
-      });
-    },
-    animateShowBigImageSection() {
-      this.$gsap.to("#bigImageSection", {
-        height: "auto",
-        clipPath: "inset(0% 0% 0% 0%)",
-        duration: 0.5,
-        ease: "power2.out",
-      });
-      this.$nextTick(() => {
-        this.scroll.update();
-      });
-    },
-    animateHideBigImageSection() {
-      this.$gsap.to("#bigImageSection", {
-        clipPath: "inset(0% 0% 100% 0%)",
-        height: 0,
-        duration: 0.5,
-        ease: "power2.out",
-      });
-      this.$nextTick(() => {
-        this.scroll.update();
-      });
-    },
-    // animateSections() {
-    //   const sections = [
-    //     { el: "#section1", from: { opacity: 0, height: 0 }, to: { opacity: 1, height: "auto" } },
-    //     // { el: "#section2", from: { opacity: 0, height: 0 }, to: { opacity: 1, height: "auto" } },
-    //     { el: "#section3", from: { opacity: 0, height: 0 }, to: { opacity: 1, height: "auto" } },
-    //     { el: "#section4", from: { opacity: 0, height: 0 }, to: { opacity: 1, height: "auto" } },
-    //     { el: "#bigImageSection", from: { opacity: 0, height: 0, display: "hidden" }, to: { opacity: 1, height: "auto", display: "block" } },
-    //   ];
-
-    //   sections.forEach(section => {
-    //     this.$gsap.fromTo(section.el, section.from, section.to);
-    //   });
-    // }
   },
   mounted() {
     this.locomotiveScrollInit();
     this.initCheckImagesLoaded();
     this.onLoadAnimation();
-    this.scrollAnimation();
     // re-initialize LocomotiveScroll on page reload
     window.addEventListener("beforeunload", () => {
       if (this.scroll) {
@@ -359,7 +326,11 @@ export default {
           id="subheader-image"
           class="col-span-2 col-start-4 translate-y-10 flex justify-center items-center opacity-0"
         >
-          <img src="/chair.jpg" alt="" class="w-full h-full object-cover" />
+          <img
+            :src="hoveredImage"
+            alt=""
+            class="object-cover w-[200px] h-[200px]"
+          />
         </section>
         <section
           id="subheader-subtext"
@@ -368,17 +339,17 @@ export default {
           <div class="w-full flex flex-col justify-end items-end">
             <div class="flex flex-col justify-end pt-12">
               <div
-                class="text-[calc(2.5vw)] leading-[calc(2.5vw)] tracking-[-0.01em] font-[530] text-left pb-4 cursor-default overflow-clip"
+                class="text-[calc(2.5vw)] leading-[calc(2.5vw)] tracking-[-0.01em] font-[530] text-left cursor-default overflow-clip"
               >
                 <p id="supportText1">Designers Frankliné Jeremy</p>
               </div>
               <div
-                class="text-[calc(2.5vw)] leading-[calc(2.5vw)] tracking-[-0.01em] font-[530] text-left pb-4 cursor-default overflow-clip"
+                class="text-[calc(2.5vw)] leading-[calc(2.5vw)] tracking-[-0.01em] font-[530] text-left cursor-default overflow-clip"
               >
                 <p id="supportText2">established their long and legendary</p>
               </div>
               <div
-                class="text-[calc(2.5vw)] leading-[calc(2.5vw)] tracking-[-0.01em] font-[530] text-left pb-4 cursor-default overflow-clip"
+                class="text-[calc(2.5vw)] leading-[calc(2.5vw)] tracking-[-0.01em] font-[530] text-left cursor-default overflow-clip"
               >
                 <p id="supportText3">relationship with Maréchal Verchetti</p>
               </div>
@@ -388,13 +359,13 @@ export default {
       </div>
       <section
         :class="[
-          'col-span-9 col-start-1 mx-[60px] pb-24',
+          'col-span-9 col-start-1 mx-[60px] pb-12',
           optionClicked ? 'pt-0 pb-2' : 'pt-12 pb-12',
         ]"
       >
         <div
           ref="option-1"
-          @mouseover="optionHover(`option-1`)"
+          @mouseover="optionHover(`option-1`, '/chair.jpg')"
           @mouseleave="optionHoverLeave(`option-1`)"
           @click="optionClick(`option-1`)"
           :class="
@@ -414,7 +385,7 @@ export default {
         </div>
         <div
           ref="option-2"
-          @mouseover="optionHover(`option-2`)"
+          @mouseover="optionHover(`option-2`, '/eameschair.jpg')"
           @mouseleave="optionHoverLeave(`option-2`)"
           @click="optionClick(`option-2`)"
           :class="
@@ -434,7 +405,7 @@ export default {
         </div>
         <div
           ref="option-3"
-          @mouseover="optionHover(`option-3`)"
+          @mouseover="optionHover(`option-3`, '/eameslight.jpg')"
           @mouseleave="optionHoverLeave(`option-3`)"
           @click="optionClick(`option-3`)"
           :class="
@@ -455,7 +426,7 @@ export default {
         <div
           id="option-4"
           ref="option-4"
-          @mouseover="optionHover(`option-4`)"
+          @mouseover="optionHover(`option-4`, '/graychairs.jpg')"
           @mouseleave="optionHoverLeave(`option-4`)"
           @click="optionClick(`option-4`)"
           :class="
@@ -490,7 +461,7 @@ export default {
           >
             <div class="flex flex-col overflow-clip h-[calc(60%)]">
               <p
-                class="text-[calc(10vw)] leading-[calc(8vw)] tracking-[-0.01em] font-[530] text-left pb-4 cursor-default"
+                class="text-[calc(10vw)] leading-[calc(7vw)] tracking-[-0.01em] font-[530] text-left pb-4 cursor-default"
                 id="headerNumber"
               >
                 23
@@ -501,17 +472,17 @@ export default {
             <div class="w-full flex flex-col justify-end items-end">
               <div class="flex flex-col justify-end pt-12">
                 <div
-                  class="text-[calc(3vw)] leading-[calc(3vw)] tracking-[-0.01em] font-[530] text-left pb-4 cursor-default overflow-clip text-white"
+                  class="text-[calc(3.2vw)] leading-[calc(3.2vw)] tracking-[-0.01em] font-[530] text-left cursor-default overflow-clip text-white"
                 >
                   <div>Designers Frankliné Jeremy</div>
                 </div>
                 <div
-                  class="text-[calc(3vw)] leading-[calc(3vw)] tracking-[-0.01em] font-[530] text-left pb-4 cursor-default overflow-clip text-white"
+                  class="text-[calc(3.2vw)] leading-[calc(3.2vw)] tracking-[-0.01em] font-[530] text-left cursor-default overflow-clip text-white"
                 >
                   <div>established their long and</div>
                 </div>
                 <div
-                  class="text-[calc(3vw)] leading-[calc(3vw)] tracking-[-0.01em] font-[530] text-left pb-4 cursor-default overflow-clip text-white"
+                  class="text-[calc(3.2vw)] leading-[calc(3.2vw)] tracking-[-0.01em] font-[530] text-left cursor-default overflow-clip text-white"
                 >
                   <div>
                     legendary relationship with
