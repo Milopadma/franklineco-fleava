@@ -333,6 +333,76 @@ export default {
           <div class="border-b-2 border-b-black pt-4" id="line-5"></div>
         </div>
       </section>
+      <section class="bg-[#151611]">
+        <div class="h-5/6 overflow-clip">
+          <img src="/bigchair.jpg" alt="" data-scroll data-scroll-speed="-1">
+        </div>
+        <section class="mx-[60px] grid grid-cols-9 gap-[30px] py-24">
+          <section class="col-span-3 col-start-1 flex flex-col pt-12 overflow-clip text-white">
+            <div class="flex flex-col overflow-clip h-[calc(60%)]">
+              <p class="text-[calc(10vw)] leading-[calc(8vw)] tracking-[-0.01em] font-[530] text-left pb-4 cursor-default"
+                id="headerNumber">
+                23
+              </p>
+            </div>
+          </section>
+          <section class="col-span-4 col-start-6 flex flex-col">
+            <div class="w-full flex flex-col justify-end items-end">
+              <div class="flex flex-col justify-end pt-12">
+                <p class="text-[calc(3vw)] leading-[calc(3vw)] tracking-[-0.01em] font-[530] text-left pb-4 cursor-default overflow-clip text-white">
+                  <div class="overflow-clip">
+                    <p>
+                      Designers Frankliné Jeremy
+                    </p>
+                  </div>
+                  <div class="overflow-clip">
+                    <p>
+                      established their long and
+                    </p>
+                  </div>
+                  <div class="overflow-clip">
+                    <p>
+                      legendary relationship with <span class="text-[#C1A986]">Maréchal Verchetti</span>
+                    </p>
+                  </div>
+                </p>
+              </div>
+            </div>
+          </section>
+          <div class="col-span-9 grid grid-cols-9 gap-[30px] text-white pt-16 pb-24">
+            <div class="col-span-2 col-start-4 flex flex-row gap-[30px]">
+              <p>1945</p>
+              <ul>
+                <li>Tempor Nam Ut</li>
+                <li>Eames Moulded Plywood</li>
+                <li>Aliquam Mi Malesuada</li>
+                <li>Egestas Odio Rhoncus</li>
+                <li>Charles And Ray Eames</li>
+              </ul>
+            </div>
+            <div class="col-span-2 col-start-6 flex flex-row gap-[30px]">
+              <p>1946</p>
+              <ul>
+                <li>Tempor Nam Ut</li>
+                <li>Eames Moulded Plywood</li>
+                <li>Aliquam Mi Malesuada</li>
+                <li>Egestas Odio Rhoncus</li>
+                <li>Charles And Ray Eames</li>
+              </ul>
+            </div>
+            <div class="col-span-2 col-start-8 flex flex-row gap-[30px]">
+              <p>1947</p>
+              <ul>
+                <li>Tempor Nam Ut</li>
+                <li>Eames Moulded Plywood</li>
+                <li>Aliquam Mi Malesuada</li>
+                <li>Egestas Odio Rhoncus</li>
+                <li>Charles And Ray Eames</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </section>
     </div>
   </SmoothScroll>
 </template>
