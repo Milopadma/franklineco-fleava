@@ -9,6 +9,7 @@ import "swiper/css";
 
 import { gsap } from "gsap";
 import imagesLoaded from "imagesloaded";
+import { onMounted, onBeforeUnmount } from "vue";
 
 // initialize images loaded check
 const initCheckImagesLoaded = () => {
@@ -55,8 +56,9 @@ const hideCursorFollower = () => {
   }
 };
 
-// scroll animation
-const scrollAnimation = () => {
+let scrollAnimationCleanup: (() => void) | null = null;
+
+const initScrollAnimation = () => {
   const elements = [
     { selector: "#chair-text-1", className: "chair-char-1" },
     { selector: "#chair-text-2", className: "chair-char-2" },
@@ -217,19 +219,25 @@ const scrollAnimation = () => {
     };
   };
 
+  const cleanupFunctions: (() => void)[] = [];
+
   animations.forEach(({ value, way, selector, animation }) => {
-    store.scroll.on(
-      "call",
-      debounce((callValue: any, callWay: any, obj: any) => {
-        if (callValue === value && callWay === way) {
-          const elements = obj.el.querySelectorAll(selector);
-          if (elements.length > 0) {
-            gsap.from(elements, animation);
-          }
+    const handler = debounce((callValue: any, callWay: any, obj: any) => {
+      if (callValue === value && callWay === way) {
+        const elements = obj.el.querySelectorAll(selector);
+        if (elements.length > 0) {
+          gsap.from(elements, animation);
         }
-      }, 16)
-    );
+      }
+    }, 16);
+
+    store.scroll.on("call", handler);
+    cleanupFunctions.push(() => store.scroll.off("call", handler));
   });
+
+  scrollAnimationCleanup = () => {
+    cleanupFunctions.forEach((cleanup) => cleanup());
+  };
 };
 
 // on load animation
@@ -290,7 +298,13 @@ const onLoadAnimation = () => {
 onMounted(() => {
   initCheckImagesLoaded();
   onLoadAnimation();
-  scrollAnimation();
+  initScrollAnimation();
+});
+
+onBeforeUnmount(() => {
+  if (scrollAnimationCleanup) {
+    scrollAnimationCleanup();
+  }
 });
 </script>
 
