@@ -378,53 +378,48 @@ onBeforeUnmount(() => {
       @mouseenter="showCursorFollower"
       @mouseleave="hideCursorFollower"
     >
-      <swiper
-        :slides-per-view="3"
-        :space-between="38"
-        :slides-offset-before="60"
-        draggable="true"
-      >
-        <swiper-slide>
+      <div class="flex overflow-x-auto space-x-9" draggable="true">
+        <div class="flex-none">
           <img src="/eameschair.jpg" alt="chair" />
           <p
             class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
           >
             Eames Moulded Plastic Side Chair
           </p>
-        </swiper-slide>
-        <swiper-slide>
+        </div>
+        <div class="flex-none">
           <img src="/eamessofa.jpg" alt="chair" />
           <p
             class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
           >
             Eames Sofa Compact
           </p>
-        </swiper-slide>
-        <swiper-slide>
+        </div>
+        <div class="flex-none">
           <img src="/eameslight.jpg" alt="chair" />
           <p
             class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
           >
             Eames Moulded Plastic Armchair
           </p>
-        </swiper-slide>
-        <swiper-slide>
+        </div>
+        <div class="flex-none">
           <img src="/eamessofa.jpg" alt="chair" />
           <p
             class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
           >
             Eames Sofa Compact
           </p>
-        </swiper-slide>
-        <swiper-slide>
+        </div>
+        <div class="flex-none">
           <img src="/eameslight.jpg" alt="chair" />
           <p
             class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
           >
             Eames Moulded Plastic Armchair
           </p>
-        </swiper-slide>
-      </swiper>
+        </div>
+      </div>
     </section>
   </div>
   <div class="mx-[60px] grid grid-cols-9 gap-[30px]">
