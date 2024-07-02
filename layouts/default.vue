@@ -20,6 +20,13 @@ const changeCursorToImage = () => {
   }
 };
 
+const initResizeObserver = () => {
+  // Add ResizeObserver to update scroll on resize
+  new ResizeObserver(() => store.scroll.update()).observe(
+    document.querySelector("[data-scroll-container]") as Element
+  );
+};
+
 const resetCursor = () => {
   const cursorFollower = ref<InstanceType<typeof CursorFollower> | null>(null);
   if (cursorFollower.value) {
@@ -94,6 +101,7 @@ const checkCurrentUrl = () => {
 
 onMounted(() => {
   checkCurrentUrl();
+  initResizeObserver();
 });
 
 watch(route, () => {

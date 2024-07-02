@@ -36,6 +36,9 @@ html {
 .debug-outline {
   @apply outline outline-red-200;
 }
+* {
+  /* @apply outline outline-red-200; */
+}
 
 .debug {
   @apply outline outline-red-500 bg-red-200;
