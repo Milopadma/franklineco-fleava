@@ -1,6 +1,6 @@
 <template>
+  <SpeedInsights />
   <div class="data-scroll">
-    <!-- <spacing :size64="true" class="col-span-9" /> -->
     <nav
       id="main-nav"
       class="col-span-9 flex justify-between font-[530] tracking-[-0.01em] relative bg-[hsla(0,0%,100%,0.4)] z-50 backdrop-blur-md pt-16 pb-4"
@@ -41,7 +41,9 @@
       </div>
       <div id="nav-menu" class="cursor-default mr-[60px]">Menu</div>
     </nav>
-    <slot />
+    <SmoothScroll>
+      <slot />
+    </SmoothScroll>
     <CursorFollower ref="cursorFollower" />
   </div>
 </template>
@@ -49,10 +51,14 @@
 <script>
 import { gsap } from "gsap";
 import CursorFollower from "~/components/cursorfollower.vue";
+import { SpeedInsights } from "@vercel/speed-insights/vue";
+import SmoothScroll from "~/components/smoothscroll.vue";
 
 export default {
   components: {
     CursorFollower,
+    SpeedInsights,
+    SmoothScroll,
   },
   data() {
     return {
