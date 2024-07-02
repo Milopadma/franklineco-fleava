@@ -165,6 +165,17 @@ export default {
         delay: 2.4,
       });
 
+      const option1 = this.$refs["option-1"];
+      const option2 = this.$refs["option-2"];
+      const option3 = this.$refs["option-3"];
+      const option4 = this.$refs["option-4"];
+      this.$gsap.from([option1, option2, option3, option4], {
+        opacity: 0,
+        duration: 1,
+        ease: "power2.out",
+        delay: 2,
+      });
+
       // set gsap ticker settings
       this.$gsap.ticker.lagSmoothing(1000, 16);
       this.$gsap.ticker.fps(120);
@@ -360,11 +371,11 @@ export default {
           Another Collective
         </h1>
         <div class="border-b-2 border-b-black pt-4" id="line-1"></div>
-        <div id="subheader" class="w-full justify-between flex flex-row pt-2">
-          <p class="capitalize">aliquam mi maecenas</p>
-          <p class="capitalize">Egestas odio</p>
-          <p class="capitalize">aliquam maecenas</p>
-          <p class="capitalize">odio rhoncus</p>
+        <div id="subheader" class="w-full grid grid-cols-9 pt-2">
+          <p class="col-span-3 capitalize">aliquam mi maecenas</p>
+          <p class="col-span-2 capitalize">Egestas odio</p>
+          <p class="col-span-3 capitalize">aliquam maecenas</p>
+          <p class="col-span-1 text-right capitalize">odio rhoncus</p>
         </div>
       </header>
       <section

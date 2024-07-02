@@ -1,14 +1,14 @@
 <template>
   <SpeedInsights />
-  <div class="data-scroll">
+  <div>
     <nav
       id="main-nav"
-      class="col-span-9 flex justify-between font-[530] tracking-[-0.01em] relative bg-[hsla(0,0%,100%,0.4)] z-50 backdrop-blur-md pt-16 pb-4"
+      class="col-span-9 grid grid-cols-9 font-[530] tracking-[-0.01em] relative bg-[hsla(0,0%,100%,0.4)] z-50 backdrop-blur-md pt-16 pb-4 mx-[60px]"
     >
-      <NuxtLink to="/" id="nav-logo" class="cursor-pointer ml-[60px]"
+      <NuxtLink to="/" id="nav-logo" class="cursor-pointer col-span-1"
         >Frankliné&Co.</NuxtLink
       >
-      <div class="min-w-[35vw] flex flex-row">
+      <div class="col-span-3 col-start-4">
         <NuxtLink
           to="/products"
           id="nav-links"
@@ -39,12 +39,18 @@
           <span id="nav-links-text">Stories</span>
         </NuxtLink>
       </div>
-      <div id="nav-menu" class="cursor-default mr-[60px]">Menu</div>
+      <div
+        id="nav-menu"
+        class="cursor-default col-start-9 col-span-1 text-right"
+      >
+        Menu
+      </div>
     </nav>
     <SmoothScroll>
       <slot />
     </SmoothScroll>
     <CursorFollower ref="cursorFollower" />
+    <DebugToggle />
   </div>
 </template>
 
@@ -53,12 +59,18 @@ import { gsap } from "gsap";
 import CursorFollower from "~/components/cursorfollower.vue";
 import { SpeedInsights } from "@vercel/speed-insights/vue";
 import SmoothScroll from "~/components/smoothscroll.vue";
+import DebugToggle from "~/components/debugtoggle.vue";
+import { store } from "~/store";
 
 export default {
   components: {
     CursorFollower,
     SpeedInsights,
     SmoothScroll,
+    DebugToggle,
+  },
+  setup() {
+    return { store };
   },
   data() {
     return {
@@ -89,7 +101,28 @@ export default {
         console.log("cursorFollower ref is not defined");
       }
     },
+
+    locomotiveScrollInit() {
+      store.scroll = new this.$LocomotiveScroll({
+        el: document.querySelector("[data-scroll-container]"),
+        smooth: true,
+        getDirection: true,
+        mobile: {
+          smooth: true,
+          getDirection: true,
+        },
+        tablet: {
+          smooth: true,
+          getDirection: true,
+          breakpoint: 0,
+        },
+      });
+      console.log("LocomotiveScroll initialized:", store.scroll);
+      this.animateScroll();
+    },
+
     animateLinks() {
+      gsap.killTweensOf(document.querySelectorAll("#nav-links-text"));
       const linkTexts = document.querySelectorAll("#nav-links-text");
       gsap.to(linkTexts, { opacity: 1, duration: 0 });
       linkTexts.forEach((linkText) => {
@@ -107,6 +140,28 @@ export default {
       // animate circle fading in when it exists
       const circles = document.querySelectorAll(".circle");
       gsap.fromTo(circles, { opacity: 0 }, { opacity: 1, duration: 0.5 });
+    },
+    animateScroll() {
+      store.scroll.on("scroll", (args) => {
+        const navElements = document.querySelectorAll("#main-nav");
+        if (args.scroll.y > 30) {
+          this.$gsap.to(navElements, {
+            translateY: "-50%",
+            paddingLeft: "2rem",
+            paddingRight: "2rem",
+            duration: 0.3,
+            ease: "circ.out",
+          }); // add padding to nav elements
+        } else {
+          this.$gsap.to(navElements, {
+            translateY: "0%",
+            paddingLeft: "0",
+            paddingRight: "0",
+            duration: 0.3,
+            ease: "circ.out",
+          }); // remove padding from nav elements
+        }
+      });
     },
     checkCurrentUrl() {
       const path = window.location.pathname;

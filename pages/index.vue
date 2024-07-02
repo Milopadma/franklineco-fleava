@@ -2,26 +2,19 @@
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
 import CursorFollower from "~/components/cursorfollower.vue";
+import { store } from "~/store";
 
 // Import Swiper styles
 import "swiper/css";
 
 export default {
+  setup() {
+    return { store };
+  },
   components: {
     Swiper,
     SwiperSlide,
     CursorFollower,
-  },
-  data() {
-    return {
-      scroll: null,
-    };
-  },
-  beforeDestroy() {
-    if (this.scroll) {
-      this.scroll.destroy();
-      this.scroll = null;
-    }
   },
   methods: {
     initCheckImagesLoaded() {
@@ -29,25 +22,9 @@ export default {
         document.querySelectorAll("[data-scroll-container]"),
         () => {
           // console.log("Images loaded");
-          this.scroll.update();
+          store.scroll.update();
         }
       );
-    },
-    locomotiveScrollInit() {
-      this.scroll = new this.$LocomotiveScroll({
-        el: document.querySelector("[data-scroll-container]"),
-        smooth: true,
-        getDirection: true,
-        mobile: {
-          smooth: true,
-          getDirection: true,
-        },
-        tablet: {
-          smooth: true,
-          getDirection: true,
-          breakpoint: 0,
-        },
-      });
     },
     showCursorFollower() {
       const cursorFollower = document.querySelector(".cursor-follower");
@@ -92,7 +69,7 @@ export default {
 
       elements.forEach(({ selector, className }) => {
         const element = document.querySelector(selector);
-        const characters = element.textContent.split("");
+        const characters = element.textContent.match(/.{1,6}/g);
         element.innerHTML = characters
           .map((char) => `<span class="${className}">${char}</span>`)
           .join("");
@@ -148,9 +125,9 @@ export default {
           animation: {
             opacity: 0,
             translateY: 10,
-            duration: 1.5,
+            duration: 5,
             ease: "power2.out",
-            stagger: 0.005,
+            stagger: 0.05,
           },
         },
         {
@@ -236,7 +213,7 @@ export default {
       };
 
       animations.forEach(({ value, way, selector, animation }) => {
-        this.scroll.on(
+        store.scroll.on(
           "call",
           debounce((callValue, callWay, obj) => {
             if (callValue === value && callWay === way) {
@@ -248,27 +225,6 @@ export default {
           }, 16)
         ); // 16ms debounce for ~60fps
       });
-
-      this.scroll.on("scroll", (args) => {
-        const navElements = document.querySelectorAll("#main-nav");
-        if (args.scroll.y > 30) {
-          this.$gsap.to(navElements, {
-            translateY: "-50%",
-            paddingLeft: "2rem",
-            paddingRight: "2rem",
-            duration: 0.3,
-            ease: "circ.out",
-          }); // add padding to nav elements
-        } else {
-          this.$gsap.to(navElements, {
-            translateY: "0%",
-            paddingLeft: "0",
-            paddingRight: "0",
-            duration: 0.3,
-            ease: "circ.out",
-          }); // remove padding from nav elements
-        }
-      });
     },
 
     onLoadAnimation() {
@@ -278,7 +234,7 @@ export default {
         .map((char) => `<span class="char">${char}</span>`)
         .join("");
 
-      const headerAnimation = this.$gsap.from(".char", {
+      this.$gsap.from(".char", {
         opacity: 0,
         y: 50, // slide in from bottom
         duration: 2,
@@ -323,17 +279,9 @@ export default {
     },
   },
   mounted() {
-    this.locomotiveScrollInit();
     this.initCheckImagesLoaded();
     this.onLoadAnimation();
     this.scrollAnimation();
-    // re-initialize LocomotiveScroll on page reload
-    window.addEventListener("beforeunload", () => {
-      if (this.scroll) {
-        this.scroll.destroy();
-        this.scroll = null;
-      }
-    });
   },
 };
 </script>
