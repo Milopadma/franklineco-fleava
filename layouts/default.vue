@@ -71,8 +71,8 @@ const animateScroll = () => {
     } else {
       gsap.to(navElements, {
         translateY: "0%",
-        paddingLeft: "0",
-        paddingRight: "0",
+        paddingLeft: "60px",
+        paddingRight: "60px",
         duration: 0.3,
         ease: "circ.out",
       }); // remove padding from nav elements
@@ -102,6 +102,7 @@ const checkCurrentUrl = () => {
 onMounted(() => {
   checkCurrentUrl();
   initResizeObserver();
+  animateScroll();
 });
 
 watch(route, () => {
