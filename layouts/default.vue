@@ -93,7 +93,11 @@ export default {
       const linkTexts = document.querySelectorAll("#nav-links-text");
       gsap.to(linkTexts, { opacity: 1, duration: 0 });
       linkTexts.forEach((linkText) => {
-        if (linkText.textContent.trim().toLowerCase() !== this.selectedLink) {
+        if (this.selectedLink === "") {
+          gsap.to(linkText, { opacity: 1, duration: 0.5 });
+        } else if (
+          linkText.textContent.trim().toLowerCase() !== this.selectedLink
+        ) {
           gsap.to(linkText, { opacity: 0.2, duration: 0.5 });
         } else {
           gsap.to(linkText, { opacity: 1, duration: 0.5 });
@@ -114,6 +118,9 @@ export default {
         this.animateLinks();
       } else if (path.includes("stories")) {
         this.selectedLink = "stories";
+        this.animateLinks();
+      } else if (path.includes("")) {
+        this.selectedLink = "";
         this.animateLinks();
       } else {
         this.selectedLink = null;
