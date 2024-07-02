@@ -15,7 +15,6 @@ import { onMounted, onBeforeUnmount } from "vue";
 const initCheckImagesLoaded = () => {
   imagesLoaded(document.querySelectorAll("[data-scroll-container]"), () => {
     // log images loaded
-    console.log("Images loaded");
     store.scroll.update();
   });
 };

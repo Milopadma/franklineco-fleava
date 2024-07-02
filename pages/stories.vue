@@ -169,7 +169,6 @@ function optionHoverLeave(option: string) {
 
 function optionClick(option: string) {
   optionClicked.value = optionClicked.value === option ? null : option;
-  console.log("option clicked:", optionClicked.value);
   const bigImageSection = document.querySelector(
     "#bigImageSection"
   ) as HTMLElement;

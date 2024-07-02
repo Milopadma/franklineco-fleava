@@ -6,7 +6,6 @@
 export default {
   mounted() {
     window.addEventListener("keydown", this.handleKeydown);
-    console.log("debug toggle ready");
   },
   beforeDestroy() {
     window.removeEventListener("keydown", this.handleKeydown);

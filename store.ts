@@ -16,7 +16,6 @@ import("locomotive-scroll").then((locomotiveScroll) => {
 
 export const store = reactive({
   get scroll() {
-    console.log("scroll", scrollInstance);
     return scrollInstance;
   },
 });
