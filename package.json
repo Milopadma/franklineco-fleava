@@ -11,10 +11,13 @@
   },
   "dependencies": {
     "@nuxt/fonts": "^0.7.0",
+    "@types/node": "^20.14.9",
     "@vercel/speed-insights": "^1.0.12",
+    "@vue/tsconfig": "^0.5.1",
     "imagesloaded": "^5.0.0",
     "locomotive-scroll": "^4.1.4",
     "nuxt": "^3.12.2",
+    "typescript": "^5.5.3",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
