@@ -371,61 +371,63 @@ onBeforeUnmount(() => {
     </section>
   </div>
   <div class="pt-44">
-    <section
-      class="w-full flex justify-center items-center cursor-grab"
-      data-scroll
-      data-scroll-call="swiperSlideAnimation"
-      @mouseenter="showCursorFollower"
-      @mouseleave="hideCursorFollower"
-    >
-      <swiper
-        :slides-per-view="3"
-        :space-between="38"
-        :slides-offset-before="60"
-        draggable="true"
+    <ClientOnly>
+      <section
+        class="w-full flex justify-center items-center cursor-grab"
+        data-scroll
+        data-scroll-call="swiperSlideAnimation"
+        @mouseenter="showCursorFollower"
+        @mouseleave="hideCursorFollower"
       >
-        <swiper-slide>
-          <img src="/eameschair.jpg" alt="chair" />
-          <p
-            class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
-          >
-            Eames Moulded Plastic Side Chair
-          </p>
-        </swiper-slide>
-        <swiper-slide>
-          <img src="/eamessofa.jpg" alt="chair" />
-          <p
-            class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
-          >
-            Eames Sofa Compact
-          </p>
-        </swiper-slide>
-        <swiper-slide>
-          <img src="/eameslight.jpg" alt="chair" />
-          <p
-            class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
-          >
-            Eames Moulded Plastic Armchair
-          </p>
-        </swiper-slide>
-        <swiper-slide>
-          <img src="/eamessofa.jpg" alt="chair" />
-          <p
-            class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
-          >
-            Eames Sofa Compact
-          </p>
-        </swiper-slide>
-        <swiper-slide>
-          <img src="/eameslight.jpg" alt="chair" />
-          <p
-            class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
-          >
-            Eames Moulded Plastic Armchair
-          </p>
-        </swiper-slide>
-      </swiper>
-    </section>
+        <Swiper
+          :slides-per-view="3"
+          :space-between="38"
+          :slides-offset-before="60"
+          draggable="true"
+        >
+          <SwiperSlide>
+            <img src="/eameschair.jpg" alt="chair" />
+            <p
+              class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
+            >
+              Eames Moulded Plastic Side Chair
+            </p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/eamessofa.jpg" alt="chair" />
+            <p
+              class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
+            >
+              Eames Sofa Compact
+            </p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/eameslight.jpg" alt="chair" />
+            <p
+              class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
+            >
+              Eames Moulded Plastic Armchair
+            </p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/eamessofa.jpg" alt="chair" />
+            <p
+              class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
+            >
+              Eames Sofa Compact
+            </p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/eameslight.jpg" alt="chair" />
+            <p
+              class="text-[calc(1vw)] leading-[calc(1vw)] tracking-[-0.02em] font-[400] text-left uppercase pt-9"
+            >
+              Eames Moulded Plastic Armchair
+            </p>
+          </SwiperSlide>
+        </Swiper>
+      </section>
+    </ClientOnly>
   </div>
   <div class="mx-[60px] grid grid-cols-9 gap-[30px]">
     <section class="col-span-9 flex flex-col">
