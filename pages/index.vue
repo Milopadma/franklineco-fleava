@@ -373,7 +373,7 @@ onBeforeUnmount(() => {
   <div class="pt-44">
     <ClientOnly>
       <section
-        class="w-full flex justify-center items-center cursor-grab"
+        class="w-full cursor-grab"
         data-scroll
         data-scroll-call="swiperSlideAnimation"
         @mouseenter="showCursorFollower"

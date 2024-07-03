@@ -1,9 +1,9 @@
 <template>
-    <div data-scroll-container>
-        <slot></slot>
-    </div>
+  <div data-scroll-container class="overflow-x-hidden">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
